@@ -7,5 +7,30 @@
   "sha256": "A27F2891F290866A71D8A6305AD9065D4C2E9F80EE469AD4A6E253D9BCEC3274",
   "downloadUrl": "https://github.com/songxuanhao/GoldSight/releases/download/v1.15.19/GoldSight-1.15.19-win-x64.zip",
   "releasePageUrl": "https://github.com/songxuanhao/GoldSight/releases/latest",
-  "mirrors": []
+  "mirrors": [],
+  "ads": {
+    "enabled": true,
+    "consentRequired": true,
+    "provider": "adsense",
+    "adsense": {
+      "client": "",
+      "slots": {
+        "top": "",
+        "mid": "",
+        "bottom": ""
+      }
+    },
+    "house": {
+      "enabled": true,
+      "items": [
+        {
+          "label": "广告位",
+          "title": "这个位置正在招租",
+          "text": "面向黄金交易者的展示位，按月合作，直接展现在首页下载区上方。",
+          "href": "https://github.com/songxuanhao/GoldSight/issues/new",
+          "cta": "了解合作 →"
+        }
+      ]
+    }
+  }
 }

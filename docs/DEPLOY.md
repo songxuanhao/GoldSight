@@ -103,3 +103,24 @@ powershell -ExecutionPolicy Bypass -File scripts\deploy-pages.ps1
 & "C:\Program Files\GitHub CLI\gh.exe" release create vX.Y.Z <zip路径> --repo songxuanhao/GoldSight --title "..." --notes "..."
 # 然后更新 assets/site.json 的 version/downloadUrl/sha256 并重新部署
 ```
+
+
+## 8. 广告位（2026-11-08 上线）
+
+页面已内置广告位，默认展示「合作位」，无需审核、立即生效：
+
+- 位置：免费说明 band 下方、六件事卡片上方（`aside.ad-slot[data-ad="top"]`）。
+- 目前展示的是招商位：「广告位 · 这个位置正在招租」，点击进入 GitHub Issues。
+- 想换成自己的产品/赞助商：改 `assets/site.json` 的 `ads.house.items[0]`（label/title/text/href/cta 五个字段），然后 prepare-dist + 部署。
+- 想关闭广告：`ads.enabled = false`。
+- 想接 Google AdSense：`ads.adsense.client` 填 `ca-pub-...`、`ads.adsense.slots` 填三个广告单元 id；AdSense 审核建议绑定自有域名（pages.dev 子域通常不通过），详见 `docs/ADS.md`。
+- 合规：广告位都带「广告位」标签、不遮挡下载按钮、不诱导点击；已发布 `privacy.html` 隐私政策（含广告 Cookie 说明）；AdSense 模式下首次访问会弹 Cookie 同意条，拒绝后不加载广告脚本。
+
+验证：
+
+```js
+document.documentElement.dataset.ads   // house | adsense | necessary | off
+window.__goldSightAds                  // { mode, slots }
+```
+
+日常更新流程不变：改 `assets/site.json` → `prepare-dist.ps1` → `deploy-pages.ps1`。

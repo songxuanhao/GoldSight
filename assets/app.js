@@ -14,6 +14,7 @@
     sizeMB: 151,
     sha256: '',
     downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.19/GoldSight-1.15.19-win-x64.zip',
+    ads: null,
   };
 
   /* ---------------- 站点元数据（下载信息以 site.json 为准，失败用内置兜底） ---------------- */
@@ -26,6 +27,7 @@
       if (meta && Number(meta.sizeMB) > 0) state.sizeMB = Number(meta.sizeMB);
       if (meta && typeof meta.sha256 === 'string') state.sha256 = meta.sha256;
       if (meta && typeof meta.downloadUrl === 'string') state.downloadUrl = meta.downloadUrl;
+      if (meta && meta.ads && typeof meta.ads === 'object') state.ads = meta.ads;
     } catch {
       /* 静态托管或本地 file:// 可能取不到，继续用兜底值 */
     }
@@ -309,6 +311,150 @@
     update();
   }
 
+  /* ---------------- 变现：广告位（合作位 / Google AdSense） ----------------
+     配置在 assets/site.json 的 ads 节点：
+       provider: 'adsense' 且填了 client/slots → 加载 AdSense（需同意 Cookie）
+       否则 → 渲染 ads.house 里的合作位（无需审核、立即生效）
+     任何脚本/网络失败都退回合作位或静默隐藏，绝不影响下载按钮。 */
+  const ADS_CONSENT_KEY = 'goldsight.ads.consent.v1';
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (ch) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    }[ch]));
+  }
+
+  function adsConfig() {
+    const raw = state.ads && typeof state.ads === 'object' ? state.ads : {};
+    const slots = Object.assign({ top: '', mid: '', bottom: '' }, raw.adsense && raw.adsense.slots ? raw.adsense.slots : {});
+    return {
+      enabled: raw.enabled !== false,
+      consentRequired: raw.consentRequired !== false,
+      client: raw.adsense && typeof raw.adsense.client === 'string' ? raw.adsense.client.trim() : '',
+      slots,
+      house: {
+        enabled: !raw.house || raw.house.enabled !== false,
+        items: raw.house && Array.isArray(raw.house.items) ? raw.house.items : [],
+      },
+    };
+  }
+
+  function adSlots() {
+    return $$('.ad-slot');
+  }
+
+  function setAdsMode(mode) {
+    document.documentElement.dataset.ads = mode;
+    window.__goldSightAds = { mode, slots: adSlots().map((el) => el.dataset.ad || '') };
+  }
+
+  function renderHouseAd(ads) {
+    const item = ads.house.items[0];
+    const slot = adSlots().find((el) => el.dataset.ad === 'top') || adSlots()[0];
+    if (!slot || !ads.house.enabled || !item) return false;
+    const card = document.createElement('div');
+    card.className = 'ad-card';
+    card.innerHTML =
+      '<span class="ad-tag"></span>' +
+      '<div class="ad-copy"><p class="ad-title"></p><p class="ad-text"></p></div>' +
+      '<a class="ad-cta" target="_blank" rel="noopener sponsored"></a>';
+    $('.ad-tag', card).textContent = item.label || '广告';
+    $('.ad-title', card).textContent = item.title || '';
+    $('.ad-text', card).textContent = item.text || '';
+    const cta = $('.ad-cta', card);
+    cta.href = item.href || '#';
+    cta.textContent = item.cta || '了解详情 →';
+    slot.replaceChildren(card);
+    slot.dataset.mode = 'house';
+    return true;
+  }
+
+  function loadAdSense(ads) {
+    const filled = adSlots().filter((el) => Boolean(ads.slots[el.dataset.ad]));
+    if (!filled.length) return renderHouseAd(ads);
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + encodeURIComponent(ads.client);
+    script.addEventListener('error', () => {
+      renderHouseAd(ads);
+      setAdsMode('adsense-failed');
+    });
+    document.head.appendChild(script);
+
+    for (const slot of filled) {
+      const ins = document.createElement('ins');
+      ins.className = 'adsbygoogle';
+      ins.style.display = 'block';
+      ins.dataset.adClient = ads.client;
+      ins.dataset.adSlot = String(ads.slots[slot.dataset.ad]);
+      ins.dataset.adFormat = 'auto';
+      ins.dataset.fullWidthResponsive = 'true';
+      slot.replaceChildren(ins);
+      const tag = document.createElement('span');
+      tag.className = 'ad-tag ad-tag-overlay';
+      tag.textContent = '广告';
+      slot.appendChild(tag);
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch {
+        /* AdSense 脚本未就绪时忽略，失败会走上面的 error 回调 */
+      }
+    }
+    setAdsMode('adsense');
+    return true;
+  }
+
+  function showConsent(ads) {
+    const banner = $('#consent');
+    if (!banner) return;
+    banner.hidden = false;
+    document.body.classList.add('consent-open');
+    const finish = (choice) => {
+      try {
+        localStorage.setItem(ADS_CONSENT_KEY, choice);
+      } catch {
+        /* 隐私模式写不了 localStorage 时忽略 */
+      }
+      banner.hidden = true;
+      document.body.classList.remove('consent-open');
+      if (choice === 'all') loadAdSense(ads);
+      else setAdsMode('necessary');
+    };
+    $('#consent-all')?.addEventListener('click', () => finish('all'), { once: true });
+    $('#consent-necessary')?.addEventListener('click', () => finish('necessary'), { once: true });
+  }
+
+  function wireAds() {
+    const ads = adsConfig();
+    if (!ads.enabled) {
+      setAdsMode('off');
+      return;
+    }
+    const hasAdSense = /^ca-pub-\d{8,}$/.test(ads.client);
+    let stored = null;
+    try {
+      stored = localStorage.getItem(ADS_CONSENT_KEY);
+    } catch {
+      stored = null;
+    }
+
+    if (!hasAdSense) {
+      setAdsMode(renderHouseAd(ads) ? 'house' : 'off');
+      return;
+    }
+    if (!ads.consentRequired || stored === 'all') {
+      loadAdSense(ads);
+      return;
+    }
+    if (stored === 'necessary') {
+      setAdsMode('necessary');
+      return;
+    }
+    showConsent(ads);
+  }
+
   async function main() {
     await loadSiteMeta();
     applyMeta();
@@ -322,6 +468,7 @@
     wireReveal();
     wireGallery();
     wireOffline();
+    wireAds();
   }
 
   if (document.readyState === 'loading') {
