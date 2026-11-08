@@ -13,7 +13,7 @@
     version: '1.15.19',
     sizeMB: 151,
     sha256: '',
-    downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.20/GoldSight-1.15.20-win-x64.zip',
+    downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.21/GoldSight-1.15.21-win-x64.zip',
     ads: null,
   };
 

@@ -1,11 +1,11 @@
 {
-  "version": "1.15.20",
+  "version": "1.15.21",
   "releaseDate": "2026-11-08",
-  "file": "GoldSight-1.15.20-win-x64.zip",
-  "sizeBytes": 158381574,
+  "file": "GoldSight-1.15.21-win-x64.zip",
+  "sizeBytes": 158381474,
   "sizeMB": 151,
-  "sha256": "3295C2E36B068BDF9C697B77CC186E919117FE75B4ADD1B690100BDADC9FE200",
-  "downloadUrl": "https://github.com/songxuanhao/GoldSight/releases/download/v1.15.20/GoldSight-1.15.20-win-x64.zip",
+  "sha256": "278F3585C01319E9CF921E56779F98C30530DC49A19E5DD93EE78B5DC136B869",
+  "downloadUrl": "https://github.com/songxuanhao/GoldSight/releases/download/v1.15.21/GoldSight-1.15.21-win-x64.zip",
   "releasePageUrl": "https://github.com/songxuanhao/GoldSight/releases/latest",
   "mirrors": [],
   "ads": {
@@ -41,10 +41,11 @@
     "wechatQr": "assets/pay/wechat.png",
     "buyUrl": ""
   },
-  "edition": "licensed-trial",
-  "trial": {
-    "days": 7,
+  "edition": "licensed",
+  "license": {
+    "mode": "paid",
     "price": "¥9.9",
-    "permanent": true
+    "permanent": true,
+    "trialDays": 0
   }
 }
