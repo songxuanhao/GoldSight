@@ -344,7 +344,7 @@
   }
 
   function adSlots() {
-    return $('.ad-slot');
+    return $$('.ad-slot');
   }
 
   function runScripts(container) {
