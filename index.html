@@ -12,8 +12,32 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="GoldSight 金瞳 · 免费超短线黄金图表工具" />
     <meta property="og:description" content="成交量分布 · 订单流 CVD · 模拟交易。免费数据源，无需注册，Windows 10/11 解压即用。" />
-    <meta property="og:image" content="assets/img/screenshot-main.png" />
-    <link rel="icon" href="assets/img/icon.png" />
+    <meta property="og:image" content="https://shuidekuai.xin/assets/img/og-cover.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://shuidekuai.xin/" />
+    <meta property="og:site_name" content="GoldSight 金瞳" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="GoldSight 金瞳 · 免费超短线黄金图表工具" />
+    <meta name="twitter:description" content="成交量分布 · 订单流 CVD · 模拟交易。免费数据源，无需注册，Windows 10/11 解压即用。" />
+    <meta name="twitter:image" content="https://shuidekuai.xin/assets/img/og-cover.webp" />
+    <link rel="canonical" href="https://shuidekuai.xin/" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "GoldSight 金瞳",
+        "operatingSystem": "Windows 10 / 11",
+        "applicationCategory": "FinanceApplication",
+        "softwareVersion": "1.15.27",
+        "description": "免费 Windows 黄金行情终端：成交量分布 POC/VAH/VAL、订单流 CVD、短期走势、模拟交易。免费数据源，无需注册。",
+        "url": "https://shuidekuai.xin/",
+        "downloadUrl": "https://github.com/songxuanhao/GoldSight/releases/latest",
+        "offers": { "@type": "Offer", "price": "9.90", "priceCurrency": "CNY" }
+      }
+    </script>
+    <link rel="icon" type="image/png" href="assets/img/favicon-64.png" />
     <link rel="stylesheet" href="assets/style.css?v=1.15.27" />
   </head>
   <body>
@@ -21,7 +45,7 @@
 
     <header class="site-head">
       <a class="brand" href="#" aria-label="GoldSight 金瞳 首页">
-        <img src="assets/img/icon.png" alt="" width="28" height="28" />
+        <img src="assets/img/favicon-64.png" alt="" width="28" height="28" />
         <span>GoldSight 金瞳</span>
       </a>
       <nav class="site-nav" aria-label="页面导航">
@@ -73,11 +97,12 @@
         <figure class="hero-shot" id="hero-shot">
           <div class="shot-frame" data-tilt>
             <img
-              src="assets/img/screenshot-main.png"
-              alt="GoldSight 金瞳主界面：四窗格 K 线、右侧成交量分布与短期走势面板"
-              width="1280"
-              height="684"
+              src="assets/img/screenshot-main.webp"
+              width="1200"
+              height="641"
               loading="eager"
+              fetchpriority="high"
+              alt="GoldSight 金瞳主界面：四窗格 K 线、右侧成交量分布与短期走势面板"
               draggable="false"
             />
           </div>
@@ -252,19 +277,19 @@
         </header>
         <div class="gallery" id="gallery" tabindex="0" role="group" aria-label="界面截图，可左右滚动">
           <figure>
-            <img src="assets/img/screenshot-vp.png" alt="成交量分布：连续像素带按成交量着色，右侧刻度显示 POC 价格" loading="lazy" width="1280" height="684" />
+            <img src="assets/img/screenshot-vp.webp" alt="成交量分布：连续像素带按成交量着色，右侧刻度显示 POC 价格" loading="lazy" decoding="async" width="1200" height="641" />
             <figcaption>成交量分布：连续像素带 + POC 刻度标签</figcaption>
           </figure>
           <figure>
-            <img src="assets/img/screenshot-orderflow.png" alt="订单流面板：短期走势卡、CVD 曲线与斜率表" loading="lazy" width="1280" height="684" />
+            <img src="assets/img/screenshot-orderflow.webp" alt="订单流面板：短期走势卡、CVD 曲线与斜率表" loading="lazy" decoding="async" width="1200" height="641" />
             <figcaption>订单流：短期走势 + CVD 斜率</figcaption>
           </figure>
           <figure>
-            <img src="assets/img/screenshot-layout.png" alt="多窗格布局：四图同时查看不同周期" loading="lazy" width="1280" height="684" />
+            <img src="assets/img/screenshot-layout.webp" alt="多窗格布局：四图同时查看不同周期" loading="lazy" decoding="async" width="1200" height="641" />
             <figcaption>多窗格布局：四个周期同屏</figcaption>
           </figure>
           <figure>
-            <img src="assets/img/screenshot-main.png" alt="主界面总览" loading="lazy" width="1280" height="684" />
+            <img src="assets/img/screenshot-main.webp" alt="主界面总览" loading="lazy" decoding="async" width="1200" height="641" />
             <figcaption>主界面总览</figcaption>
           </figure>
         </div>
@@ -353,6 +378,42 @@
               <p>一般不需要梯子：软件直连 Gate.io（XAUT 逐笔）与 Binance Data-Stream（PAXG 逐笔/盘口），国内宽带实测可直连，订单流、CVD、盘口都能用。只有可选项受影响：OKX 历史兜底、Swissquote 备用报价、OANDA 真实历史（需要自己的 Token 且走代理）。万一你的网络连不上订单流数据源，AI 面板会直接提示，K 线与成交量分布（COMEX/东方财富）不受影响。</p>
             </div>
           </div>
+
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a8" id="faq-q8">
+                付款后多久自动解锁？没解锁怎么办？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a8" role="region" aria-labelledby="faq-q8" hidden>
+              <p>一般几秒内：软件每 1.2 秒查询一次支付结果，付款成功后激活窗会自动消失。如果超过几分钟仍未解锁，点激活窗里的「已付款？立即查询」立即重试；仍不行请到 GitHub Issues 留言并附上订单号（付款页面显示），会人工补发或退款。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a9" id="faq-q9">
+                不满意能退款吗？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a9" role="region" aria-labelledby="faq-q9" hidden>
+              <p>软件是虚拟商品，付款后自动解锁、可长期使用，原则上不支持无理由退款。建议先免费下载、把行情和功能都试一遍，确认适合自己再购买；若付款后未能解锁，会协助补发或全额退款。</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a10" id="faq-q10">
+                广告位怎么合作？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a10" role="region" aria-labelledby="faq-q10" hidden>
+              <p>本站有 4 个展示位，流量主要来自黄金交易、量化工具与行情软件搜索，适合工具类、数据类、投教类合作。按月固定位置展示，内容可随时更换，可在 GitHub Issues 备注「广告合作」联系。</p>
+            </div>
+          </div>
         </div>
       </section>
       <!-- 广告位 3（页尾，FAQ 之后） -->
@@ -363,7 +424,7 @@
     <footer class="site-foot">
       <div class="foot-main">
         <div>
-          <p class="foot-brand"><img src="assets/img/icon.png" alt="" width="20" height="20" /> GoldSight 金瞳</p>
+          <p class="foot-brand"><img src="assets/img/favicon-64.png" alt="" width="20" height="20" /> GoldSight 金瞳</p>
           <p class="foot-note">免费 Windows 桌面黄金图表工具 · 版本 <span id="foot-version">v1.15.27</span></p>
         </div>
         <div class="foot-meta">

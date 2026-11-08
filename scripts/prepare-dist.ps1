@@ -11,6 +11,8 @@ New-Item -ItemType Directory -Path (Join-Path $dist 'assets\img') -Force | Out-N
 Copy-Item (Join-Path $web 'index.html') $dist -Force
 if (Test-Path (Join-Path $web 'privacy.html')) { Copy-Item (Join-Path $web 'privacy.html') $dist -Force }
 if (Test-Path (Join-Path $web 'ads.txt')) { Copy-Item (Join-Path $web 'ads.txt') $dist -Force }
+if (Test-Path (Join-Path $web 'robots.txt')) { Copy-Item (Join-Path $web 'robots.txt') $dist -Force }
+if (Test-Path (Join-Path $web 'sitemap.xml')) { Copy-Item (Join-Path $web 'sitemap.xml') $dist -Force }
 Copy-Item (Join-Path $web 'assets\style.css') (Join-Path $dist 'assets') -Force
 Copy-Item (Join-Path $web 'assets\app.js') (Join-Path $dist 'assets') -Force
 Copy-Item (Join-Path $web 'assets\site.json') (Join-Path $dist 'assets') -Force
