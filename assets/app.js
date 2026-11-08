@@ -335,6 +335,7 @@
       consentRequired: raw.consentRequired !== false,
       client: raw.adsense && typeof raw.adsense.client === 'string' ? raw.adsense.client.trim() : '',
       slots,
+      customHtml: raw.customHtml && typeof raw.customHtml === 'object' ? raw.customHtml : {},
       house: {
         enabled: !raw.house || raw.house.enabled !== false,
         items: raw.house && Array.isArray(raw.house.items) ? raw.house.items : [],
@@ -343,7 +344,31 @@
   }
 
   function adSlots() {
-    return $$('.ad-slot');
+    return $('.ad-slot');
+  }
+
+  function runScripts(container) {
+    for (const old of Array.from(container.querySelectorAll('script'))) {
+      const script = document.createElement('script');
+      for (const attr of Array.from(old.attributes)) script.setAttribute(attr.name, attr.value);
+      script.textContent = old.textContent;
+      old.replaceWith(script);
+    }
+  }
+
+  function renderCustom(slot, html, label) {
+    const card = document.createElement('div');
+    card.className = 'ad-card ad-card-custom';
+    const tag = document.createElement('span');
+    tag.className = 'ad-tag';
+    tag.textContent = label || '广告';
+    const body = document.createElement('div');
+    body.className = 'ad-custom-body';
+    body.innerHTML = html;
+    runScripts(body);
+    card.append(tag, body);
+    slot.replaceChildren(card);
+    slot.dataset.mode = 'house';
   }
 
   function setAdsMode(mode) {
@@ -355,8 +380,19 @@
     if (!ads.house.enabled || !ads.house.items.length) return false;
     let filled = 0;
     adSlots().forEach((slot, index) => {
+      const html = ads.customHtml[slot.dataset.ad];
+      if (typeof html === 'string' && html.trim()) {
+        renderCustom(slot, html, '广告');
+        filled += 1;
+        return;
+      }
       const item = ads.house.items[index % ads.house.items.length];
       if (!item) return;
+      if (typeof item.html === 'string' && item.html.trim()) {
+        renderCustom(slot, item.html, item.label);
+        filled += 1;
+        return;
+      }
       const card = document.createElement('div');
       card.className = 'ad-card';
       card.innerHTML =

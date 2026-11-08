@@ -45,6 +45,12 @@
           "cta": "查看详情 →"
         }
       ]
+    },
+    "customHtml": {
+      "top": "",
+      "hero": "",
+      "mid": "",
+      "bottom": ""
     }
   },
   "purchase": {
