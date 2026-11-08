@@ -44,11 +44,11 @@
             成交量分布看筹码堆在哪、订单流 CVD 看主动买卖谁在持续、短期走势卡把多周期涨跌合成一句话。免费数据源开箱可用，不需要 API Key，也不需要注册。
           </p>
           <div class="hero-actions" id="download">
-            <a class="btn-download" id="download-btn" href="https://github.com/songxuanhao/GoldSight/releases/download/v1.15.22/GoldSight-1.15.22-win-x64.zip" rel="noopener" download data-state="idle">
+            <a class="btn-download" id="download-btn" href="https://github.com/songxuanhao/GoldSight/releases/download/v1.15.23/GoldSight-1.15.23-win-x64.zip" rel="noopener" download data-state="idle">
               <span class="btn-icon" aria-hidden="true">↓</span>
               <span class="label">
                 <span class="label-main">下载 Windows 版</span>
-                <span class="label-sub" id="download-meta">v1.15.22 · 约 151 MB · 9.9 一次买断 · 解压即用</span>
+                <span class="label-sub" id="download-meta">v1.15.23 · 约 151 MB · 9.9 一次买断 · 解压即用</span>
               </span>
             </a>
             <p class="download-status" id="download-status" role="status" aria-live="polite"></p>
@@ -350,6 +350,17 @@
               <p>这是有意保留的诚实提示：我们回测了 30 天近 2.9 万根 1 分钟数据，简单动量与推断订单流在 3~30 分钟持有期没有稳定方向优势。所以订单流面板只描述当前结构，评分与命中率默认折叠，不诱导你按「偏多/偏空」下单。</p>
             </div>
           </div>
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a7" id="faq-q7">
+                国内网络能用吗？订单流需要梯子吗？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a7" role="region" aria-labelledby="faq-q7" hidden>
+              <p>一般不需要梯子：软件直连 Gate.io（XAUT 逐笔）与 Binance Data-Stream（PAXG 逐笔/盘口），国内宽带实测可直连，订单流、CVD、盘口都能用。只有可选项受影响：OKX 历史兜底、Swissquote 备用报价、OANDA 真实历史（需要自己的 Token 且走代理）。万一你的网络连不上订单流数据源，AI 面板会直接提示，K 线与成交量分布（COMEX/东方财富）不受影响。</p>
+            </div>
+          </div>
         </div>
       </section>
       <!-- 广告位 3（页尾，FAQ 之后） -->
@@ -361,7 +372,7 @@
       <div class="foot-main">
         <div>
           <p class="foot-brand"><img src="assets/img/icon.png" alt="" width="20" height="20" /> GoldSight 金瞳</p>
-          <p class="foot-note">免费 Windows 桌面黄金图表工具 · 版本 <span id="foot-version">v1.15.22</span></p>
+          <p class="foot-note">免费 Windows 桌面黄金图表工具 · 版本 <span id="foot-version">v1.15.23</span></p>
         </div>
         <div class="foot-meta">
           <a href="#download">下载</a>
@@ -397,7 +408,7 @@
     <!-- 手机端吸底主操作：只在首屏之后出现 -->
     <div class="mobile-cta" id="mobile-cta" hidden>
       <span class="mobile-cta-meta"><strong>GoldSight 金瞳</strong><span id="mobile-meta">Windows · 免费</span></span>
-      <a class="btn-download small" href="https://github.com/songxuanhao/GoldSight/releases/download/v1.15.22/GoldSight-1.15.22-win-x64.zip" rel="noopener" download>下载</a>
+      <a class="btn-download small" href="https://github.com/songxuanhao/GoldSight/releases/download/v1.15.23/GoldSight-1.15.23-win-x64.zip" rel="noopener" download>下载</a>
     </div>
 
     <script src="assets/app.js" defer></script>

@@ -57,3 +57,5 @@ node "F:\deepseek\work\preview-server.js" "F:\deepseek\工作区\GoldSight-web"
 - 站点：https://goldsight.pages.dev
 - 下载：https://github.com/songxuanhao/GoldSight/releases/latest
 - 更新流程见 `docs/DEPLOY.md` 第 7 节。
+
+- v1.15.23（2026-11-08）：三地时钟标注城市+交易盘（北京/伦敦/纽约），窄窗口不再隐藏城市名；订单流数据源离线时 AI 面板给出明确网络提示；首页 FAQ 增加「国内网络/是否需要梯子」说明。
