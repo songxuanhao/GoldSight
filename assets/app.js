@@ -359,16 +359,38 @@
   function renderCustom(slot, html, label) {
     const card = document.createElement('div');
     card.className = 'ad-card ad-card-custom';
-    const tag = document.createElement('span');
-    tag.className = 'ad-tag';
-    tag.textContent = label || '广告';
+    if (label) {
+      const tag = document.createElement('span');
+      tag.className = 'ad-tag';
+      tag.textContent = label;
+      card.append(tag);
+    }
     const body = document.createElement('div');
     body.className = 'ad-custom-body';
     body.innerHTML = html;
     runScripts(body);
-    card.append(tag, body);
+    card.append(body);
     slot.replaceChildren(card);
     slot.dataset.mode = 'house';
+  }
+
+  /** 商品网格位：把 house.items 全部渲染成一个整块推荐卡片，不带“广告”字样 */
+  function renderShopGrid(slot, ads) {
+    if (!ads.house.enabled || !ads.house.items.length) return false;
+    const grid = document.createElement('div');
+    grid.className = 'shop-grid';
+    for (const item of ads.house.items) {
+      if (!item || typeof item.html !== 'string' || !item.html.trim()) continue;
+      const holder = document.createElement('div');
+      holder.innerHTML = item.html;
+      runScripts(holder);
+      while (holder.firstChild) grid.appendChild(holder.firstChild);
+    }
+    if (!grid.childElementCount) return false;
+    slot.replaceChildren(grid);
+    slot.dataset.mode = 'house';
+    slot.dataset.layout = 'grid';
+    return true;
   }
 
   function setAdsMode(mode) {
@@ -380,16 +402,21 @@
     if (!ads.house.enabled || !ads.house.items.length) return false;
     let filled = 0;
     adSlots().forEach((slot, index) => {
+      // 商品网格位：整块渲染全部推荐商品（不带“广告”字样）
+      if (slot.dataset.layout === 'grid') {
+        if (renderShopGrid(slot, ads)) filled += 1;
+        return;
+      }
       const html = ads.customHtml[slot.dataset.ad];
       if (typeof html === 'string' && html.trim()) {
-        renderCustom(slot, html, '广告');
+        renderCustom(slot, html, '');
         filled += 1;
         return;
       }
       const item = ads.house.items[index % ads.house.items.length];
       if (!item) return;
       if (typeof item.html === 'string' && item.html.trim()) {
-        renderCustom(slot, item.html, item.label);
+        renderCustom(slot, item.html, item.label || '');
         filled += 1;
         return;
       }
@@ -399,7 +426,8 @@
         '<span class="ad-tag"></span>' +
         '<div class="ad-copy"><p class="ad-title"></p><p class="ad-text"></p></div>' +
         '<a class="ad-cta" target="_blank" rel="noopener sponsored"></a>';
-      $('.ad-tag', card).textContent = item.label || '广告';
+      const tagEl = $('.ad-tag', card);
+      tagEl.textContent = item.label || '';
       $('.ad-title', card).textContent = item.title || '';
       $('.ad-text', card).textContent = item.text || '';
       const cta = $('.ad-cta', card);
