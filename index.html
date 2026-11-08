@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GoldSight 金瞳 · 免费的超短线黄金图表工具（Windows）</title>
+    <meta
+      name="description"
+      content="GoldSight 金瞳是免费 Windows 桌面黄金交易图表：成交量分布 POC/VAH/VAL、订单流 CVD、短期走势、模拟交易，免费实时数据无需 API Key。绿色便携版，解压即用。"
+    />
+    <meta name="theme-color" content="#0a0d12" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GoldSight 金瞳 · 免费超短线黄金图表工具" />
+    <meta property="og:description" content="成交量分布 · 订单流 CVD · 模拟交易。免费数据源，无需注册，Windows 10/11 解压即用。" />
+    <meta property="og:image" content="assets/img/screenshot-main.png" />
+    <link rel="icon" href="assets/img/icon.png" />
+    <link rel="stylesheet" href="assets/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#download">跳到下载</a>
+
+    <header class="site-head">
+      <a class="brand" href="#" aria-label="GoldSight 金瞳 首页">
+        <img src="assets/img/icon.png" alt="" width="28" height="28" />
+        <span>GoldSight 金瞳</span>
+      </a>
+      <nav class="site-nav" aria-label="页面导航">
+        <a href="#features">功能</a>
+        <a href="#start">上手</a>
+        <a href="#shots">截图</a>
+        <a href="#faq">常见问题</a>
+        <a class="nav-cta" href="#download">下载</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- L0：一句话价值 + 主操作 -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Windows 10 / 11 · 免费 · 绿色便携版</p>
+          <h1 id="hero-title">把黄金的一分钟行情<br />看成一张地图</h1>
+          <p class="lede">
+            成交量分布看筹码堆在哪、订单流 CVD 看主动买卖谁在持续、短期走势卡把多周期涨跌合成一句话。免费数据源开箱可用，不需要 API Key，也不需要注册。
+          </p>
+          <div class="hero-actions" id="download">
+            <a class="btn-download" id="download-btn" href="https://github.com/songxuanhao/GoldSight/releases/download/v1.15.19/GoldSight-1.15.19-win-x64.zip" rel="noopener" download data-state="idle">
+              <span class="btn-icon" aria-hidden="true">↓</span>
+              <span class="label">
+                <span class="label-main">下载 Windows 版</span>
+                <span class="label-sub" id="download-meta">v1.15.19 · 约 350 MB · 解压即用</span>
+              </span>
+            </a>
+            <p class="download-status" id="download-status" role="status" aria-live="polite"></p>
+            <div class="hero-links">
+              <a href="#start">怎么安装</a>
+              <span aria-hidden="true">·</span>
+              <a href="#faq">免费吗</a>
+              <span aria-hidden="true">·</span>
+              <button type="button" class="link-btn" id="copy-link" aria-label="复制下载链接">复制下载链接</button>
+            </div>
+            <p class="os-note" id="os-note" hidden>
+              当前设备不是 Windows 10/11：仍可下载压缩包，复制链接到 Windows 电脑解压后运行 <code>GoldSight.exe</code>。
+            </p>
+          </div>
+          <ul class="hero-points">
+            <li>免费实时数据：无需付费行情 API</li>
+            <li>模拟交易：实时练习 / 历史回测，不接实盘</li>
+            <li>不写注册表，删除文件夹即卸载</li>
+          </ul>
+        </div>
+
+        <figure class="hero-shot" id="hero-shot">
+          <div class="shot-frame" data-tilt>
+            <img
+              src="assets/img/screenshot-main.png"
+              alt="GoldSight 金瞳主界面：四窗格 K 线、右侧成交量分布与短期走势面板"
+              width="1280"
+              height="684"
+              loading="eager"
+              draggable="false"
+            />
+          </div>
+          <figcaption>主界面：多窗格 K 线 + 成交量分布 + 短期走势</figcaption>
+        </figure>
+      </section>
+
+      <!-- L1：数据与费用说明（用户最想确认的事） -->
+      <section class="band" aria-labelledby="free-title">
+        <div class="band-inner">
+          <h2 id="free-title">免费，是因为数据本身就免费</h2>
+          <div class="band-grid">
+            <article class="band-card">
+              <h3>实时黄金行情</h3>
+              <p>OKX / Gate 的黄金代币逐笔成交，作为现货黄金的实时参考（成交方向真实，非报价推断）。</p>
+            </article>
+            <article class="band-card">
+              <h3>COMEX 与新闻</h3>
+              <p>东方财富公开接口提供 COMEX 黄金行情与财经快讯，用于订单流与情绪参考。</p>
+            </article>
+            <article class="band-card">
+              <h3>真实历史（可选）</h3>
+              <p>有 OANDA 账户可填自己的 Token 拉真实历史 K 线；没有也能正常使用，界面会自动回退。</p>
+            </article>
+          </div>
+          <p class="band-foot">软件不内置任何需要付费购买的行情 Key，也不会替你购买行情。数据延迟取决于公开源，通常为秒级到分钟级。</p>
+        </div>
+      </section>
+
+      <section id="features" class="section" aria-labelledby="features-title">
+        <header class="section-head">
+          <h2 id="features-title">你会用到的六件事</h2>
+          <p>每张卡片点开看细节；手机上直接点按展开。</p>
+        </header>
+        <div class="cards" id="feature-cards">
+          <article class="card" tabindex="0">
+            <div class="card-body">
+              <span class="card-icon" aria-hidden="true">▤</span>
+              <h3>成交量分布</h3>
+              <p class="card-summary">筹码堆在哪一目了然</p>
+              <div class="card-detail"><p>按价格档统计成交量，POC 价格直接标在右侧刻度尺；默认按量能渐变着色，不再依赖买卖分色。支持交易日累加、可视范围、锚定与固定区间。</p></div>
+            </div>
+          </article>
+          <article class="card" tabindex="0">
+            <div class="card-body">
+              <span class="card-icon" aria-hidden="true">◇</span>
+              <h3>订单流与 CVD</h3>
+              <p class="card-summary">看主动买卖是持续还是一波流</p>
+              <div class="card-detail"><p>主动买卖差、CVD 累计曲线与 60 秒滚动斜率，配合盘口买卖压与大单方向。斜率用回归 + EMA 平滑，并给出强度 σ，避免被单笔大单带偏。</p></div>
+            </div>
+          </article>
+          <article class="card" tabindex="0">
+            <div class="card-body">
+              <span class="card-icon" aria-hidden="true">⌁</span>
+              <h3>短期走势卡</h3>
+              <p class="card-summary">1/5/15 分钟与 1 小时涨跌合成一句话</p>
+              <div class="card-detail"><p>多周期真实涨跌、价格相对 VWAP、CVD 变化、盘口与大单按权重合成当前状态（上涨趋势 / 偏多 / 震荡 / 偏空 / 下跌趋势）。只描述现在，不预测未来。</p></div>
+            </div>
+          </article>
+          <article class="card" tabindex="0">
+            <div class="card-body">
+              <span class="card-icon" aria-hidden="true">▣</span>
+              <h3>模拟交易</h3>
+              <p class="card-summary">实时练习与历史回测，不碰真钱</p>
+              <div class="card-detail"><p>市价/限价、止损止盈、杠杆与账本统计；按 K 线回放做历史练习，每笔交易自动记录。仅模拟，不接入任何实盘下单接口。</p></div>
+            </div>
+          </article>
+          <article class="card" tabindex="0">
+            <div class="card-body">
+              <span class="card-icon" aria-hidden="true">▥</span>
+              <h3>多图与技术工具</h3>
+              <p class="card-summary">1/2/3/4 图布局，标注、指标、预警</p>
+              <div class="card-detail"><p>水平线、趋势线、矩形、斐波那契、文字备注；MA/EMA/VWAP/BOLL 与 K 线形态；价格预警、快讯、盘口。画布支持键盘操作（←→ 平移、+/- 缩放）。</p></div>
+            </div>
+          </article>
+          <article class="card" tabindex="0">
+            <div class="card-body">
+              <span class="card-icon" aria-hidden="true">↺</span>
+              <h3>自带设置与快捷键</h3>
+              <p class="card-summary">按 ? 看全部快捷键</p>
+              <div class="card-detail"><p>配色、周期记忆、布局记忆、界面缩放；按 <kbd>?</kbd> 打开快捷键面板，常用操作都有键盘路径，也有按钮等价入口。</p></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="start" class="section section-start" aria-labelledby="start-title">
+        <header class="section-head">
+          <h2 id="start-title">三步开始</h2>
+          <p>不需要安装包，也不需要管理员权限。</p>
+        </header>
+        <ol class="steps">
+          <li>
+            <span class="step-no">1</span>
+            <div>
+              <h3>下载并解压</h3>
+              <p>下载压缩包，解压到一个有写入权限的文件夹（例如 <code>D:\GoldSight</code>），不要放在系统盘的只读目录。</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-no">2</span>
+            <div>
+              <h3>双击 GoldSight.exe</h3>
+              <p>如果 Windows 弹出「已保护你的电脑」，点「更多信息 → 仍要运行」；绿色版未做代码签名，这是正常提示。</p>
+            </div>
+          </li>
+          <li>
+            <span class="step-no">3</span>
+            <div>
+              <h3>选品种与周期</h3>
+              <p>默认已连好免费数据源，直接看 XAU/USD；按 <kbd>?</kbd> 查看快捷键，指标面板里可以微调成交量分布与订单流。</p>
+            </div>
+          </li>
+        </ol>
+        <div class="start-foot">
+          <p class="muted">校验下载完整性：</p>
+          <div class="sha-row">
+            <code id="sha-value">计算中…</code>
+            <button type="button" class="btn-ghost" id="copy-sha" aria-label="复制 SHA256 校验值">复制</button>
+          </div>
+          <p class="status-line" id="sha-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section id="shots" class="section section-shots" aria-labelledby="shots-title">
+        <header class="section-head">
+          <h2 id="shots-title">界面截图</h2>
+          <p>左右滑动查看（手机上露出下一张）。</p>
+        </header>
+        <div class="gallery" id="gallery" tabindex="0" role="group" aria-label="界面截图，可左右滚动">
+          <figure>
+            <img src="assets/img/screenshot-vp.png" alt="成交量分布：连续像素带按成交量着色，右侧刻度显示 POC 价格" loading="lazy" width="1280" height="684" />
+            <figcaption>成交量分布：连续像素带 + POC 刻度标签</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/screenshot-orderflow.png" alt="订单流面板：短期走势卡、CVD 曲线与斜率表" loading="lazy" width="1280" height="684" />
+            <figcaption>订单流：短期走势 + CVD 斜率</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/screenshot-layout.png" alt="多窗格布局：四图同时查看不同周期" loading="lazy" width="1280" height="684" />
+            <figcaption>多窗格布局：四个周期同屏</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/img/screenshot-main.png" alt="主界面总览" loading="lazy" width="1280" height="684" />
+            <figcaption>主界面总览</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="faq" class="section section-faq" aria-labelledby="faq-title">
+        <header class="section-head">
+          <h2 id="faq-title">常见问题</h2>
+          <p>没列到的，下载后按 <kbd>?</kbd> 或看设置里的说明。</p>
+        </header>
+        <div class="faq-list" id="faq-list">
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+                真的免费吗？会不会用几天就收费？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+              <p>免费。软件本身不收费，用的都是公开免费的数据源，不内置任何需要付费购买的行情 API，也不需要注册账号。后续版本如有变化会在此页提前说明。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+                数据延迟多少？和真实盘口一样吗？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+              <p>现货参考来自黄金代币的实时逐笔（秒级）；COMEX 与新闻来自公开接口，通常为秒级到分钟级。它不是 CME 官方逐笔或 DOM，做超短线可以看结构与方向，但不要把它当成交易所原始盘口。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+                能直接下单交易吗？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+              <p>不能。模拟交易只在软件内部记账，不连接任何券商或交易所，也不涉及真实资金。软件仅用于行情研究与练习。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+                Mac / 手机能用吗？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+              <p>目前只提供 Windows 10/11 x64 版本。Mac 需要自行用源码构建；手机端暂不支持，页面上看到的截图来自桌面版。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">
+                杀毒软件报毒 / 弹 SmartScreen？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+              <p>绿色版没有做代码签名，部分安全软件会提示未知发布者。可以先用页面上的 SHA256 校验文件完整，再选择「更多信息 → 仍要运行」。软件不写注册表，删除整个文件夹即可卸载。</p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <h3>
+              <button type="button" class="faq-q" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+                为什么短期走势写着「没有统计优势」？
+                <span class="faq-plus" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
+              <p>这是有意保留的诚实提示：我们回测了 30 天近 2.9 万根 1 分钟数据，简单动量与推断订单流在 3~30 分钟持有期没有稳定方向优势。所以订单流面板只描述当前结构，评分与命中率默认折叠，不诱导你按「偏多/偏空」下单。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="foot-main">
+        <div>
+          <p class="foot-brand"><img src="assets/img/icon.png" alt="" width="20" height="20" /> GoldSight 金瞳</p>
+          <p class="foot-note">免费 Windows 桌面黄金图表工具 · 版本 <span id="foot-version">v1.15.19</span></p>
+        </div>
+        <div class="foot-meta">
+          <a href="#download">下载</a>
+          <a href="#faq">常见问题</a>
+          <button type="button" class="link-btn" id="copy-sha-foot">复制 SHA256</button>
+        </div>
+      </div>
+      <p class="disclaimer">
+        风险提示：本软件仅用于行情研究与模拟练习，不构成任何投资建议；不接入实盘交易，不代客理财。行情数据来自公开免费接口，可能存在延迟或中断，请勿作为下单唯一依据。
+      </p>
+      <p class="copyright">© 2026 GoldSight 金瞳</p>
+    </footer>
+
+    <!-- 手机端吸底主操作：只在首屏之后出现 -->
+    <div class="mobile-cta" id="mobile-cta" hidden>
+      <span class="mobile-cta-meta"><strong>GoldSight 金瞳</strong><span id="mobile-meta">Windows · 免费</span></span>
+      <a class="btn-download small" href="https://github.com/songxuanhao/GoldSight/releases/download/v1.15.19/GoldSight-1.15.19-win-x64.zip" rel="noopener" download>下载</a>
+    </div>
+
+    <script src="assets/app.js" defer></script>
+  </body>
+</html>
