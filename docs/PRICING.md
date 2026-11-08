@@ -85,3 +85,13 @@ gh release create v1.15.21 release\GoldSight-1.15.21-win-x64.zip --repo songxuan
   3. 重新 `wrangler pages deploy`（functions 与绑定已配好），`GET /api/config` 返回 `configured:true, mock:false` 后，软件会自动出现「扫码付款 · 自动解锁」按钮。
 - 运维兜底：`POST /admin/paid`（Header `X-Admin-Token`）可手动标记已付并发码；KV 键：`order:<id>`、`machine:<code>`、`paid:<machine>`。
 - 安全：授权码仍是 Ed25519 离线签名（客户端只校验公钥），服务器只存「已付款」事实；同一机器重复下单直接返回已发授权码。
+
+## 真实支付已开通（2026-11-08）
+
+- 渠道：虎皮椒「微信支付四」，Appid `201906189746`，费率 2%，商户号 `1004026420`；支付网关 `https://api.xunhupay.com/payment/do.html`（客户端不直连，统一由 Pages Functions 代发起）。
+- 域名：`https://shuidekuai.xin`（Cloudflare 托管，Pages 自定义域 + 自动 HTTPS）。
+- Pages 环境变量（生产+预览一致）：`XUNHU_APPID`、`XUNHU_SECRET`（加密变量）、`XUNHU_GATEWAY`、`MOCK_PAY=0`、`PUBLIC_BASE_URL=https://shuidekuai.xin`、`NOTIFY_URL=https://shuidekuai.xin/api/xunhu/notify`、`RETURN_URL`/`CALLBACK_URL=https://shuidekuai.xin/`。
+- 支付回调：`POST https://shuidekuai.xin/api/xunhu/notify`（验签 → 金额校验 → 幂等 → Ed25519 签发授权码 → 写 KV；客户端 3 秒轮询 `/api/order?id=` 自动激活）。
+- 密钥轮换：虎皮椒后台「我的支付渠道 → 点我重置密钥」后，把新密钥写入 Pages 环境变量 `XUNHU_SECRET` 并重新部署即可；旧密钥立即失效。
+- 支付宝渠道（`201906189747`，￥88 已付）仍在虎皮椒审核中（`pay_v`），开通后再补 `AppSecret` 并做渠道选择逻辑。
+- 验证记录：真实下单返回虎皮椒 `payUrl`/`qrUrl`；用官方签名规则模拟回调 → 订单变 `paid` → 返回 258 字符 `GS1` 授权码 → 客户端 `verifyLicenseCode` 校验通过；测试订单/机器码记录已从 KV 清理。

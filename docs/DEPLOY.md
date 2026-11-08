@@ -132,3 +132,15 @@ window.__goldSightAds                  // { mode, slots }
 - 部署命令（在 `GoldSight-web` 目录）：`node <wrangler路径> pages deploy dist --project-name goldsight --branch main`（wrangler 位于 `F:\deepseek\work\cf-deploy\node_modules\wrangler\bin\wrangler.js`）。
 - 已废弃的独立 Worker `goldsight-license.goldsight.workers.dev`：workers.dev 域名在国内被 DNS 污染无法访问，改用 pages.dev 同域 Functions，用户无需额外域名。
 - 自测：`node F:\deepseek\work\worker-license\test-e2e.cjs`（mock 下单 → 管理员标记已付 → 轮询拿码 → 校验签名）。
+
+### 真实支付（2026-11-08 上线）
+
+| 项目 | 值 |
+| --- | --- |
+| 支付渠道 | 虎皮椒 微信支付四（Appid 201906189746，费率 2%） |
+| 支付网关 | https://api.xunhupay.com |
+| 站点域名 | https://shuidekuai.xin（Cloudflare zone `8585cec3a12b7a882a30b068d94f68c4`） |
+| 回调地址 | https://shuidekuai.xin/api/xunhu/notify |
+| MOCK_PAY | 0（真实支付） |
+
+注意：Pages Functions 的 5xx 响应会被 Cloudflare 替换成 `error code: 5xx` 文本，业务错误请以 200 + `{error,message}` 返回；虎皮椒 `/payment/do.html` 的响应字段是**扁平**的（`url`/`url_qrcode`/`openid`），不是文档里的 `data.*` 包装。
