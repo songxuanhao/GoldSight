@@ -10,10 +10,10 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const state = {
-    version: '1.15.26',
+    version: '1.15.27',
     sizeMB: 151,
-    sha256: 'EA195B9C27B3860011947BA14E25659358C873020E453F82DAC5139B4CB37265',
-    downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.26/GoldSight-1.15.26-win-x64.zip',
+    sha256: '9CCA7A9B1C39CFA28A882D77E768EBF0D40B1E77A253133E3088DD383925A96D',
+    downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.26/GoldSight-1.15.27-win-x64.zip',
     ads: null,
   };
 
