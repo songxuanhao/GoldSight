@@ -1,4 +1,4 @@
-﻿/* GoldSight 金瞳 · 落地页交互
+/* GoldSight 金瞳 · 落地页交互
    规范见 docs/LANDING-SPEC.md：下载按钮状态机、FAQ 手风琴、手机吸底 CTA、
    触屏/键盘等价、减弱动效。所有网络与剪贴板失败都有降级路径。 */
 
@@ -10,9 +10,9 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const state = {
-    version: '1.15.19',
+    version: '1.15.21',
     sizeMB: 151,
-    sha256: '',
+    sha256: '278F3585C01319E9CF921E56779F98C30530DC49A19E5DD93EE78B5DC136B869',
     downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.21/GoldSight-1.15.21-win-x64.zip',
     ads: null,
   };
@@ -35,7 +35,7 @@
   }
 
   function applyMeta() {
-    const label = `v${state.version} · 压缩包约 ${state.sizeMB} MB · 解压即用`;
+    const label = `v${state.version} · 压缩包约 ${state.sizeMB} MB · 9.9 一次买断 · 解压即用`;
     const heroMeta = $('#download-meta');
     if (heroMeta) heroMeta.textContent = label;
     const footVersion = $('#foot-version');
