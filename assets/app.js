@@ -13,7 +13,7 @@
     version: '1.15.19',
     sizeMB: 151,
     sha256: '',
-    downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.19/GoldSight-1.15.19-win-x64.zip',
+    downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.20/GoldSight-1.15.20-win-x64.zip',
     ads: null,
   };
 
@@ -28,6 +28,7 @@
       if (meta && typeof meta.sha256 === 'string') state.sha256 = meta.sha256;
       if (meta && typeof meta.downloadUrl === 'string') state.downloadUrl = meta.downloadUrl;
       if (meta && meta.ads && typeof meta.ads === 'object') state.ads = meta.ads;
+    if (meta && meta.purchase && typeof meta.purchase === 'object') state.purchase = meta.purchase;
     } catch {
       /* 静态托管或本地 file:// 可能取不到，继续用兜底值 */
     }
@@ -455,6 +456,30 @@
     showConsent(ads);
   }
 
+  // 价格板块：site.json 的 purchase 配置优先，未配置时保留页面默认文案
+  function wirePricing() {
+    const meta = state.purchase || {};
+    const priceEl = document.getElementById('price-num');
+    if (priceEl && typeof meta.price === 'string' && meta.price.trim()) priceEl.textContent = meta.price.trim();
+
+    const contactEl = document.getElementById('buy-contact');
+    if (contactEl && typeof meta.contact === 'string' && meta.contact.trim()) {
+      contactEl.textContent = '购买 / 售后联系：' + meta.contact.trim();
+    }
+
+    const qrMap = { alipay: meta.alipayQr, wechat: meta.wechatQr };
+    document.querySelectorAll('.pay-qr img[data-qr]').forEach((img) => {
+      const key = img.dataset.qr;
+      const rel = qrMap[key];
+      if (!rel) {
+        img.closest('.pay-qr').classList.add('missing');
+        return;
+      }
+      img.addEventListener('error', () => img.closest('.pay-qr').classList.add('missing'), { once: true });
+      img.src = rel;
+    });
+  }
+
   async function main() {
     await loadSiteMeta();
     applyMeta();
@@ -469,6 +494,7 @@
     wireGallery();
     wireOffline();
     wireAds();
+    wirePricing();
   }
 
   if (document.readyState === 'loading') {

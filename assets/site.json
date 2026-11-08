@@ -1,11 +1,11 @@
 {
-  "version": "1.15.19",
+  "version": "1.15.20",
   "releaseDate": "2026-11-08",
-  "file": "GoldSight-1.15.19-win-x64.zip",
-  "sizeBytes": 158378538,
+  "file": "GoldSight-1.15.20-win-x64.zip",
+  "sizeBytes": 158381574,
   "sizeMB": 151,
-  "sha256": "A27F2891F290866A71D8A6305AD9065D4C2E9F80EE469AD4A6E253D9BCEC3274",
-  "downloadUrl": "https://github.com/songxuanhao/GoldSight/releases/download/v1.15.19/GoldSight-1.15.19-win-x64.zip",
+  "sha256": "3295C2E36B068BDF9C697B77CC186E919117FE75B4ADD1B690100BDADC9FE200",
+  "downloadUrl": "https://github.com/songxuanhao/GoldSight/releases/download/v1.15.20/GoldSight-1.15.20-win-x64.zip",
   "releasePageUrl": "https://github.com/songxuanhao/GoldSight/releases/latest",
   "mirrors": [],
   "ads": {
@@ -32,5 +32,19 @@
         }
       ]
     }
+  },
+  "purchase": {
+    "enabled": true,
+    "price": "¥9.9",
+    "contact": "微信/QQ：请填写（改 assets/site.json 的 purchase.contact）",
+    "alipayQr": "assets/pay/alipay.png",
+    "wechatQr": "assets/pay/wechat.png",
+    "buyUrl": ""
+  },
+  "edition": "licensed-trial",
+  "trial": {
+    "days": 7,
+    "price": "¥9.9",
+    "permanent": true
   }
 }

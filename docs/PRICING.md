@@ -1,0 +1,72 @@
+# GoldSight 定价与授权（9.9 一次买断）
+
+## 定价
+
+| 项目 | 内容 |
+| --- | --- |
+| 免费内容 | 实时行情（XAUT/PAXG 代币逐笔 + COMEX 公开数据）、成交量分布、订单流 CVD、多窗格、标注、模拟交易 |
+| 试用 | 下载即用，**7 天全功能试用**（从首次启动算起，本机记录） |
+| 正式版 | **¥9.9 一次买断 · 永久使用 · 单机授权**（含后续小版本更新） |
+| 支付方式 | 支付宝 / 微信个人收款码（人工发授权码） |
+| 授权方式 | 离线激活：机器码 → 付款 → 授权码，不联网校验 |
+
+## 用户购买/激活流程
+
+1. 打开软件 → 标题栏「试用剩余 N 天 · 激活」→ 点开激活窗口，看到 **本机机器码**（形如 `372D-D93D-1CA8-912F`）。
+2. 扫码付款 ¥9.9，付款备注机器码后 4 位（便于对账）。
+3. 把「机器码 + 付款截图」发给作者（微信/QQ，见 `src/license/purchase-info.ts` 与站点 `assets/site.json` 的 `purchase.contact`）。
+4. 作者用发卡脚本生成授权码，回发给用户。
+5. 用户把授权码粘进软件 → 点「激活」→ 标题栏变成「已授权：昵称」，永久有效。
+
+## 作者发卡（本机）
+
+发卡脚本：`F:\deepseek\工作区\GoldSight\scripts\keygen.mjs`
+私钥：`F:\deepseek\工作区\GoldSight-变现\keys\license-private.pem`（**不要外传、不要提交到仓库**）
+公钥已内置在软件里（`shared/license-core.mjs` 的 `LICENSE_PUBLIC_KEY_B64`）。
+
+```bash
+# 永久授权（一次买断）
+node scripts/keygen.mjs --machine 372D-D93D-1CA8-912F --name "张三" --order "ORDER-001" --permanent
+
+# 限时授权（按天，例如 30 天）
+node scripts/keygen.mjs --machine 372D-D93D-1CA8-912F --name "张三" --order "ORDER-001" --days 30
+
+# 输出到文件，便于批量发卡
+node scripts/keygen.mjs --machine XXXX-XXXX-XXXX-XXXX --name "李四" --order "ORDER-002" --permanent --out license.txt
+```
+
+注意：
+- 授权码与机器码绑定，换电脑需重新发卡（可给老用户免费补发，成本为零）。
+- 回滚方案：如果哪天想彻底免费，把 `npm run pack` 打出的 private 版直接发出去即可；licensed 版只影响你新发布的包。
+
+## 收款码与联系方式怎么配
+
+| 位置 | 文件 | 说明 |
+| --- | --- | --- |
+| 软件激活窗口 | `GoldSight/public/pay/alipay.png`、`wechat.png` | 打包时自动进入安装目录，激活窗口显示 |
+| 软件内联系方式 | `GoldSight/src/license/purchase-info.ts` → `contact` | 改完重新 `npm run pack:licensed` |
+| 落地页价格区 | `GoldSight-web/assets/pay/alipay.png`、`wechat.png` | 页面显示收款码 |
+| 落地页文案/联系方式 | `GoldSight-web/assets/site.json` → `purchase` | 改完跑 `prepare-dist.ps1` + `deploy-pages.ps1` |
+
+## 发布新版本流程
+
+```powershell
+cd F:\deepseek\工作区\GoldSight
+# 1) 改版本号 package.json version（如 1.15.21）
+npm run pack:licensed                     # 构建 + 打包到 release-licensed
+cd release-licensed\GoldSight-win32-x64
+tar -a -c -f ..\..\..\GoldSight-web\release\GoldSight-1.15.21-win-x64.zip .
+# 2) 算 SHA256，更新 GoldSight-web/assets/site.json 与 index.html 的版本/链接
+# 3) 部署站点
+cd F:\deepseek\工作区\GoldSight-web
+powershell -File scripts\prepare-dist.ps1
+powershell -File scripts\deploy-pages.ps1
+# 4) 上传安装包到 GitHub Release（gh 需在 git 仓库内或加 --repo 参数）
+gh release create v1.15.21 release\GoldSight-1.15.21-win-x64.zip --repo songxuanhao/GoldSight --title "GoldSight 金瞳 v1.15.21" --notes "更新说明"
+```
+
+## 退款与售后建议
+
+- 9.9 金额很低，建议「激活失败/机器码变更」免费重发；不设退款流程，页面写明「虚拟商品，激活后不支持退款」。
+- 支持渠道：站点 FAQ + GitHub Issues + 微信/QQ（人工）。
+- 备案/合规：个人收款码小额经营可以，但长期建议办个体工商户；软件内与落地页都需保留「模拟交易、不构成投资建议」的风险提示。
