@@ -36,9 +36,7 @@
   "purchase": {
     "enabled": true,
     "price": "¥9.9",
-    "contact": "微信/QQ：请填写（改 assets/site.json 的 purchase.contact）",
-    "alipayQr": "assets/pay/alipay.png",
-    "wechatQr": "assets/pay/wechat.png",
+    "contact": "",
     "buyUrl": ""
   },
   "edition": "licensed",
@@ -52,5 +50,7 @@
       "wechat",
       "alipay"
     ]
-  }
+  },
+  "downloadMirror": "https://gofile.io/d/sjlmxD9q",
+  "mirrorNote": "GitHub 下载慢或打不开时的备用镜像（gofile 页面，点文件名下载）"
 }

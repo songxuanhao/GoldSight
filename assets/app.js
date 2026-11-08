@@ -11,6 +11,7 @@
 
   const state = {
     version: '1.15.27',
+    downloadMirror: '',
     sizeMB: 151,
     sha256: '9CCA7A9B1C39CFA28A882D77E768EBF0D40B1E77A253133E3088DD383925A96D',
     downloadUrl: 'https://github.com/songxuanhao/GoldSight/releases/download/v1.15.26/GoldSight-1.15.27-win-x64.zip',
@@ -29,6 +30,7 @@
       if (meta && typeof meta.downloadUrl === 'string') state.downloadUrl = meta.downloadUrl;
       if (meta && meta.ads && typeof meta.ads === 'object') state.ads = meta.ads;
     if (meta && meta.purchase && typeof meta.purchase === 'object') state.purchase = meta.purchase;
+    if (meta && typeof meta.downloadMirror === 'string') state.downloadMirror = meta.downloadMirror.trim();
     } catch {
       /* 静态托管或本地 file:// 可能取不到，继续用兜底值 */
     }
@@ -350,24 +352,28 @@
   }
 
   function renderHouseAd(ads) {
-    const item = ads.house.items[0];
-    const slot = adSlots().find((el) => el.dataset.ad === 'top') || adSlots()[0];
-    if (!slot || !ads.house.enabled || !item) return false;
-    const card = document.createElement('div');
-    card.className = 'ad-card';
-    card.innerHTML =
-      '<span class="ad-tag"></span>' +
-      '<div class="ad-copy"><p class="ad-title"></p><p class="ad-text"></p></div>' +
-      '<a class="ad-cta" target="_blank" rel="noopener sponsored"></a>';
-    $('.ad-tag', card).textContent = item.label || '广告';
-    $('.ad-title', card).textContent = item.title || '';
-    $('.ad-text', card).textContent = item.text || '';
-    const cta = $('.ad-cta', card);
-    cta.href = item.href || '#';
-    cta.textContent = item.cta || '了解详情 →';
-    slot.replaceChildren(card);
-    slot.dataset.mode = 'house';
-    return true;
+    if (!ads.house.enabled || !ads.house.items.length) return false;
+    let filled = 0;
+    adSlots().forEach((slot, index) => {
+      const item = ads.house.items[index % ads.house.items.length];
+      if (!item) return;
+      const card = document.createElement('div');
+      card.className = 'ad-card';
+      card.innerHTML =
+        '<span class="ad-tag"></span>' +
+        '<div class="ad-copy"><p class="ad-title"></p><p class="ad-text"></p></div>' +
+        '<a class="ad-cta" target="_blank" rel="noopener sponsored"></a>';
+      $('.ad-tag', card).textContent = item.label || '广告';
+      $('.ad-title', card).textContent = item.title || '';
+      $('.ad-text', card).textContent = item.text || '';
+      const cta = $('.ad-cta', card);
+      cta.href = item.href || '#';
+      cta.textContent = item.cta || '了解详情 →';
+      slot.replaceChildren(card);
+      slot.dataset.mode = 'house';
+      filled += 1;
+    });
+    return filled > 0;
   }
 
   function loadAdSense(ads) {
@@ -462,29 +468,32 @@
     const priceEl = document.getElementById('price-num');
     if (priceEl && typeof meta.price === 'string' && meta.price.trim()) priceEl.textContent = meta.price.trim();
 
-    const contactEl = document.getElementById('buy-contact');
-    if (contactEl && typeof meta.contact === 'string' && meta.contact.trim()) {
-      contactEl.textContent = '购买 / 售后联系：' + meta.contact.trim();
-    }
 
-    const qrMap = { alipay: meta.alipayQr, wechat: meta.wechatQr };
-    document.querySelectorAll('.pay-qr img[data-qr]').forEach((img) => {
-      const key = img.dataset.qr;
-      const rel = qrMap[key];
-      if (!rel) {
-        img.closest('.pay-qr').classList.add('missing');
-        return;
-      }
-      img.addEventListener('error', () => img.closest('.pay-qr').classList.add('missing'), { once: true });
-      img.src = rel;
-    });
   }
 
+  function wireMirror() {
+    const url = typeof state.downloadMirror === 'string' ? state.downloadMirror : '';
+    if (!url) return;
+    const heroLinks = document.querySelector('.hero-links');
+    if (!heroLinks) return;
+    const sep = document.createElement('span');
+    sep.textContent = '·';
+    sep.setAttribute('aria-hidden', 'true');
+    heroLinks.appendChild(sep);
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = '下载慢？国内镜像';
+    a.className = 'mirror-link';
+    heroLinks.appendChild(a);
+  }
   async function main() {
     await loadSiteMeta();
     applyMeta();
     wireCopyButtons();
     wireDownloadButton();
+    wireMirror();
     wireOsNotice();
     wireFaq();
     wireCards();

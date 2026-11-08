@@ -946,3 +946,5 @@ body.consent-open .mobile-cta {
     padding-top: 16px;
   }
 }
+
+.buy-note { margin: 14px 0 0; font-size: 13px; line-height: 1.75; color: var(--muted); }
