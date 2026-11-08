@@ -24,11 +24,25 @@
       "enabled": true,
       "items": [
         {
-          "label": "广告位",
-          "title": "这个位置正在招租",
-          "text": "面向黄金交易者的展示位，按月合作，直接展现在首页下载区上方。",
+          "label": "广告",
+          "title": "黄金行情工具 · 合作展示位",
+          "text": "面向黄金、期货、外汇交易者的展示位，按月合作，直接出现在首页下载区附近。",
           "href": "https://github.com/songxuanhao/GoldSight/issues/new",
           "cta": "了解合作 →"
+        },
+        {
+          "label": "广告",
+          "title": "这里可以放你的产品 / 社群 / 服务",
+          "text": "交易课程、行情工具、社群招募都可以；单个位置按月展示，位置固定、内容可随时更换。",
+          "href": "https://github.com/songxuanhao/GoldSight/issues/new",
+          "cta": "联系合作 →"
+        },
+        {
+          "label": "广告",
+          "title": "广告位 · 正在招租",
+          "text": "网站主要流量来自黄金交易与量化工具搜索，适合工具类、数据类、投教类合作。",
+          "href": "https://github.com/songxuanhao/GoldSight/issues/new",
+          "cta": "查看详情 →"
         }
       ]
     }

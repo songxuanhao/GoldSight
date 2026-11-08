@@ -594,8 +594,15 @@ h1 {
 /* ---------------- 广告位与隐私同意（v1.15.19 变现） ---------------- */
 .ad-slot {
   width: min(var(--max), calc(100vw - 48px));
-  margin: 10px auto 0;
+  margin: 14px auto 0;
   position: relative;
+}
+.ad-slot-hero {
+  margin-top: 22px;
+}
+.ad-slot-hero .ad-card {
+  background: linear-gradient(180deg, rgba(240, 185, 11, 0.1), rgba(255, 255, 255, 0.02));
+  border-color: rgba(240, 185, 11, 0.32);
 }
 .ad-slot:empty {
   display: none;
@@ -605,21 +612,22 @@ h1 {
   gap: 16px;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(240, 185, 11, 0.2);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.02);
+  background: linear-gradient(180deg, rgba(240, 185, 11, 0.05), rgba(255, 255, 255, 0.02));
   padding: 16px 20px;
 }
 .ad-tag {
   flex: none;
   align-self: flex-start;
   font-size: 10px;
+  font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--muted);
-  border: 1px solid var(--line);
+  color: #1a1405;
+  background: var(--gold);
   border-radius: 6px;
-  padding: 2px 6px;
-  line-height: 1.4;
+  padding: 2px 7px;
+  line-height: 1.5;
 }
 .ad-tag-overlay {
   position: absolute;
