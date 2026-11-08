@@ -25,24 +25,35 @@
       "items": [
         {
           "label": "广告",
-          "title": "黄金行情工具 · 合作展示位",
-          "text": "面向黄金、期货、外汇交易者的展示位，按月合作，直接出现在首页下载区附近。",
+          "category": "黄金/股票 工具",
+          "title": "黄金 / 股票行情工具合作位",
+          "text": "面向黄金、A股、期货交易者的展示位；只接受行情工具、数据分析、投教内容。",
           "href": "https://github.com/songxuanhao/GoldSight/issues/new",
           "cta": "了解合作 →"
         },
         {
           "label": "广告",
-          "title": "这里可以放你的产品 / 社群 / 服务",
-          "text": "交易课程、行情工具、社群招募都可以；单个位置按月展示，位置固定、内容可随时更换。",
+          "category": "财经数据/交易工具",
+          "title": "财经数据 / 交易工具 · 合作展示位",
+          "text": "行情源、数据接口、交易软件、量化工具——这里就是相关用户最集中的位置。",
           "href": "https://github.com/songxuanhao/GoldSight/issues/new",
           "cta": "联系合作 →"
         },
         {
           "label": "广告",
-          "title": "广告位 · 正在招租",
-          "text": "网站主要流量来自黄金交易与量化工具搜索，适合工具类、数据类、投教类合作。",
+          "category": "黄金商品 推荐",
+          "title": "黄金相关商品 / 服务推荐位",
+          "text": "投资金条、黄金饰品、财经书籍、交易课程等按效果或按月合作。",
           "href": "https://github.com/songxuanhao/GoldSight/issues/new",
-          "cta": "查看详情 →"
+          "cta": "查看合作方式 →"
+        },
+        {
+          "label": "广告",
+          "category": "投教/交易课程",
+          "title": "投教内容 / 交易课程 · 合作位",
+          "text": "面向黄金、股票新手与进阶交易者的内容合作，页面流量来自交易相关搜索。",
+          "href": "https://github.com/songxuanhao/GoldSight/issues/new",
+          "cta": "了解详情 →"
         }
       ]
     },
@@ -51,6 +62,18 @@
       "hero": "",
       "mid": "",
       "bottom": ""
+    },
+    "policy": {
+      "vertical": [
+        "黄金",
+        "股票",
+        "期货",
+        "外汇",
+        "财经数据",
+        "交易工具",
+        "投教"
+      ],
+      "note": "广告位只接与黄金/股票交易、财经数据、投教相关的合作；不接博彩、贷款、虚拟币、荐股带单。"
     }
   },
   "purchase": {
