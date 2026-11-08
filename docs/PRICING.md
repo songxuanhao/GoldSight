@@ -95,3 +95,12 @@ gh release create v1.15.21 release\GoldSight-1.15.21-win-x64.zip --repo songxuan
 - 密钥轮换：虎皮椒后台「我的支付渠道 → 点我重置密钥」后，把新密钥写入 Pages 环境变量 `XUNHU_SECRET` 并重新部署即可；旧密钥立即失效。
 - 支付宝渠道（`201906189747`，￥88 已付）仍在虎皮椒审核中（`pay_v`），开通后再补 `AppSecret` 并做渠道选择逻辑。
 - 验证记录：真实下单返回虎皮椒 `payUrl`/`qrUrl`；用官方签名规则模拟回调 → 订单变 `paid` → 返回 258 字符 `GS1` 授权码 → 客户端 `verifyLicenseCode` 校验通过；测试订单/机器码记录已从 KV 清理。
+
+
+## 支付宝渠道已开通（2026-11-08）
+
+- 虎皮椒支付宝个人支付渠道已签约成功，Appid `201906189747`。
+- 后端 Pages env：`XUNHU_ALIPAY_APPID`（plain）、`XUNHU_ALIPAY_SECRET`（secret）；`/api/config` 返回 `channels: { wechat, alipay }`；`/api/orders` 接受 `channel: 'wechat' | 'alipay'`（默认 wechat），订单记录里保存 channel，回调按订单 channel 选择对应密钥验签。
+- 客户端 v1.15.25 起在激活窗口提供「微信支付 / 支付宝」切换，下单后显示对应渠道二维码，付款后仍自动解锁。
+- 验证：真实支付宝下单返回 alipay qrUrl；模拟支付宝回调验签通过 → paid → 授权码可被 `verifyLicenseCode` 校验；同机器重复下单直接返回已购授权。
+- 注意：两个渠道的 `密钥` 都要保密，轮换时同步更新 Pages env 并重新部署。
