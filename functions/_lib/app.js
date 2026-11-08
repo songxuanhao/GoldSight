@@ -128,13 +128,15 @@ function buildLicense(env, machine, orderId) {
 
 /* -------------------------- 虎皮椒支付 -------------------------- */
 
-async function createXunhuPayment(env, orderId, amount, machine) {
+async function createXunhuPayment(env, orderId, amount, machine, creds) {
+  const appid = creds && creds.appid ? creds.appid : env.XUNHU_APPID;
+  const secret = creds && creds.secret ? creds.secret : env.XUNHU_SECRET;
   const gateway = String(env.XUNHU_GATEWAY || 'https://api.xunhupay.com').replace(/\/+$/, '');
   const publicBase = String(env.PUBLIC_BASE_URL || 'https://goldsight.pages.dev').replace(/\/+$/, '');
   const notifyUrl = `${publicBase}/api/xunhu/notify`;
   const params = {
     version: '1.1',
-    appid: env.XUNHU_APPID,
+    appid,
     trade_order_id: orderId,
     total_fee: Number(amount).toFixed(2),
     title: 'GoldSight 金瞳 正式版授权（永久）',
@@ -144,7 +146,7 @@ async function createXunhuPayment(env, orderId, amount, machine) {
     time: String(Math.floor(Date.now() / 1000)),
     nonce_str: randomId(32),
   };
-  params.hash = signXunhu(params, env.XUNHU_SECRET);
+  params.hash = signXunhu(params, secret);
   const res = await fetch(`${gateway}/payment/do.html`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json;charset=UTF-8' },
@@ -175,7 +177,9 @@ async function handleCreateOrder(request, env) {
 
   const orderId = newOrderId();
   const amount = Number(env.PRICE_CNY || '9.90').toFixed(2);
+  const channel = String(body.channel || 'wechat') === 'alipay' ? 'alipay' : 'wechat';
   const record = {
+    channel,
     id: orderId,
     machine,
     amount,
@@ -185,12 +189,16 @@ async function handleCreateOrder(request, env) {
 
   const mock = String(env.MOCK_PAY || '0') === '1';
   let pay = { payUrl: '', qrUrl: '', openOrderId: '' };
+  const creds =
+    channel === 'alipay'
+      ? { appid: env.XUNHU_ALIPAY_APPID, secret: env.XUNHU_ALIPAY_SECRET }
+      : { appid: env.XUNHU_APPID, secret: env.XUNHU_SECRET };
   if (!mock) {
-    if (!env.XUNHU_APPID || !env.XUNHU_SECRET) {
+    if (!creds.appid || !creds.secret) {
       return json({ error: 'PAY_NOT_CONFIGURED', message: '支付渠道尚未配置' }, 503);
     }
     try {
-      pay = await createXunhuPayment(env, orderId, amount, machine);
+      pay = await createXunhuPayment(env, orderId, amount, machine, creds);
     } catch (err) {
       return json({ error: 'PAY_INIT_FAILED', message: String(err && err.message ? err.message : err) }, 200);
     }
@@ -205,6 +213,7 @@ async function handleCreateOrder(request, env) {
     machine,
     amount,
     mock,
+    channel,
     payUrl: pay.payUrl,
     qrUrl: pay.qrUrl,
   });
@@ -212,16 +221,6 @@ async function handleCreateOrder(request, env) {
 
 async function handleNotify(request, env) {
   const data = await readParams(request);
-  const secret = env.XUNHU_SECRET;
-  if (!secret) return text('fail', 500);
-  const received = String(data.hash || '');
-  const expected = signXunhu(data, secret);
-  if (!received || received !== expected) {
-    console.warn('notify bad signature', data.trade_order_id);
-    return text('fail', 400);
-  }
-  if (String(data.status) !== 'OD') return text('success'); // 非成功状态不处理，但回 success 避免重试
-
   const orderId = String(data.trade_order_id || '');
   const raw = await env.ORDERS.get(`order:${orderId}`);
   if (!raw) {
@@ -229,6 +228,15 @@ async function handleNotify(request, env) {
     return text('fail', 404);
   }
   const record = JSON.parse(raw);
+  const secret = record.channel === 'alipay' ? env.XUNHU_ALIPAY_SECRET : env.XUNHU_SECRET;
+  if (!secret) return text('fail', 500);
+  const received = String(data.hash || '');
+  const expected = signXunhu(data, secret);
+  if (!received || received !== expected) {
+    console.warn('notify bad signature', orderId);
+    return text('fail', 400);
+  }
+  if (String(data.status) !== 'OD') return text('success'); // 非成功状态不处理，但回 success 避免重试
 
   // 金额校验（防篡改）
   const paidFee = Number(data.total_fee);
@@ -321,6 +329,10 @@ export const onRequest = async ({ request, env }) => {
           price: env.PRICE_CNY || '9.90',
           configured: Boolean(env.XUNHU_APPID && env.XUNHU_SECRET),
           mock: String(env.MOCK_PAY || '0') === '1',
+          channels: {
+            wechat: Boolean(env.XUNHU_APPID && env.XUNHU_SECRET),
+            alipay: Boolean(env.XUNHU_ALIPAY_APPID && env.XUNHU_ALIPAY_SECRET),
+          },
         });
       }
       if (request.method === 'POST' && url.pathname === '/api/orders') return await handleCreateOrder(request, env);
