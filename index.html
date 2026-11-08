@@ -3,15 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GoldSight 金瞳 · 黄金短线交易者的 Windows 行情工作台</title>
+    <title>黄金订单流 + 成交量分布软件 | GoldSight 金瞳 XAUUSD 短线交易工具</title>
     <meta
       name="description"
-      content="成交量分布把筹码堆的位置摊开，订单流 CVD 看清主动买卖谁在持续，四窗格同屏 + 短期走势卡把多周期合成一句话。免费数据源，无需 API Key，Windows 绿色便携版。"
+      content="GoldSight 金瞳是 Windows 黄金短线交易软件：成交量分布（Volume Profile，POC/VAH/VAL）、订单流（Order Flow，CVD/主动买卖差/大单方向）、VWAP、盘口深度（DOM 十档）、多周期同屏（1分/3分/5分/15分/30分/1小时/4小时/日线）、模拟交易与历史回测。免费数据源，无需 API Key，解压即用。"
     />
+    <meta name="keywords" content="黄金交易软件, XAUUSD, 伦敦金, 现货黄金, 订单流, 订单流软件, Order Flow, 成交量分布, Volume Profile, POC, VAH, VAL, CVD, VWAP, 盘口, DOM, 逐笔成交, 多周期, 短线交易, 黄金行情软件, Windows 行情软件, 模拟交易, 历史回测, GoldSight, 金瞳" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#0a0d12" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="GoldSight 金瞳 · 黄金短线交易者的行情工作台" />
-    <meta property="og:description" content="成交量分布 · 订单流 CVD · 四窗格同屏 · 短期走势卡。免费数据源，无需注册，Windows 解压即用。" />
+    <meta property="og:title" content="黄金订单流 + 成交量分布软件 | GoldSight 金瞳" />
+    <meta property="og:description" content="Windows 黄金短线交易软件：订单流（Order Flow）+ 成交量分布（Volume Profile）看清主动买卖与筹码密集区，POC/VAH/VAL、CVD、VWAP、盘口十档、多周期同屏，免费数据源解压即用。" />
     <meta property="og:image" content="https://shuidekuai.xin/assets/img/og-cover.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -19,8 +21,8 @@
     <meta property="og:site_name" content="GoldSight 金瞳" />
     <meta property="og:locale" content="zh_CN" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GoldSight 金瞳 · 黄金短线交易者的行情工作台" />
-    <meta name="twitter:description" content="成交量分布 · 订单流 CVD · 四窗格同屏 · 短期走势卡。免费数据源，无需注册。" />
+    <meta name="twitter:title" content="黄金订单流 + 成交量分布软件 | GoldSight 金瞳" />
+    <meta name="twitter:description" content="订单流 Order Flow + 成交量分布 Volume Profile，POC/VAH/VAL、CVD、VWAP、盘口十档、多周期同屏。" />
     <meta name="twitter:image" content="https://shuidekuai.xin/assets/img/og-cover.webp" />
     <link rel="canonical" href="https://shuidekuai.xin/" />
     <script type="application/ld+json">
@@ -28,17 +30,50 @@
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "GoldSight 金瞳",
+        "alternateName": ["GoldSight", "黄金订单流软件", "成交量分布软件"],
         "operatingSystem": "Windows 10 / 11",
         "applicationCategory": "FinanceApplication",
+        "applicationSubCategory": "Trading",
         "softwareVersion": "1.15.27",
-        "description": "Windows 黄金短线行情工作台：成交量分布 POC/VAH/VAL、订单流 CVD、四窗格同屏、短期走势卡、模拟交易。免费数据源，无需注册。",
+        "inLanguage": "zh-CN",
+        "description": "Windows 黄金短线交易软件：订单流（Order Flow）、成交量分布（Volume Profile，POC/VAH/VAL）、CVD、VWAP、盘口深度、多周期同屏、模拟交易与历史回测。",
         "url": "https://shuidekuai.xin/",
         "downloadUrl": "https://github.com/songxuanhao/GoldSight/releases/latest",
-        "offers": { "@type": "Offer", "price": "9.90", "priceCurrency": "CNY" }
+        "screenshot": "https://shuidekuai.xin/assets/img/screenshot-main.webp",
+        "featureList": [
+          "订单流 Order Flow：主动买卖差、CVD 累计曲线、大单方向、60 秒斜率与强度 σ",
+          "成交量分布 Volume Profile：POC / VAH / VAL、按量能着色、交易日/可视范围/锚定三种模式",
+          "盘口深度 DOM：买卖十档与买卖压比",
+          "多周期同屏：1分 / 3分 / 5分 / 15分 / 30分 / 1小时 / 4小时 / 日线，1/2/3/4 窗格布局",
+          "VWAP 与短期走势卡：1分/5分/15分/1小时涨跌、VWAP 偏离、盘口与大单投票",
+          "模拟交易与历史回测：不接实盘、不下真单",
+          "画线工具与预警：水平线、趋势线、斐波那契、矩形、文字备注、价格预警",
+          "绿色便携 exe，无需安装与管理员权限"
+        ],
+        "offers": { "@type": "Offer", "price": "9.90", "priceCurrency": "CNY", "availability": "https://schema.org/InStock" }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "GoldSight 金瞳免费吗？", "acceptedAnswer": { "@type": "Answer", "text": "软件免费下载、免费数据源，全部功能通过 9.9 元一次性买断解锁，不订阅、不按年收费。" } },
+          { "@type": "Question", "name": "什么是订单流（Order Flow）？", "acceptedAnswer": { "@type": "Answer", "text": "订单流是逐笔成交的方向与力量：主动买、主动卖、大单方向、CVD 累计与盘口深度。GoldSight 用 XAUT/PAXG 真实逐笔成交计算，不靠报价推断。" } },
+          { "@type": "Question", "name": "成交量分布（Volume Profile）怎么看？", "acceptedAnswer": { "@type": "Answer", "text": "把每个价格档的成交量画在 K 线右侧，最长的价格档是控制点 POC，包含 70% 成交量的区间是价值区 VAH/VAL。筹码密集处更容易形成支撑压力。" } },
+          { "@type": "Question", "name": "能直接下单交易吗？", "acceptedAnswer": { "@type": "Answer", "text": "不能。GoldSight 只有模拟交易与历史回测，不接实盘、不碰资金，是行情与订单流分析工具。" } },
+          { "@type": "Question", "name": "支持 Mac 或手机吗？", "acceptedAnswer": { "@type": "Answer", "text": "目前只提供 Windows 10/11 绿色便携版，Mac 和手机暂不支持。" } },
+          { "@type": "Question", "name": "国内网络能用吗？", "acceptedAnswer": { "@type": "Answer", "text": "订单流数据源（Gate、Binance Data-Stream）与东方财富、新浪国内可直连；OKX、Swissquote、OANDA 需要代理，且 OANDA 历史数据为可选。" } },
+          { "@type": "Question", "name": "支持退款吗？", "acceptedAnswer": { "@type": "Answer", "text": "虚拟商品不支持退款：软件可免费下载并先试用全部功能，确认合适再购买。" } },
+          { "@type": "Question", "name": "付款后多久自动解锁？没解锁怎么办？", "acceptedAnswer": { "@type": "Answer", "text": "扫码付款成功后一般几秒内自动解锁；若超过 2 分钟未解锁，可在激活窗口点「已付款？立即查询」。" } }
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      { "@context": "https://schema.org", "@type": "WebSite", "name": "GoldSight 金瞳", "url": "https://shuidekuai.xin/", "inLanguage": "zh-CN" }
+    </script>
     <link rel="icon" type="image/png" href="assets/img/favicon-64.png" />
-    <link rel="stylesheet" href="assets/style.css?v=1.16.3" />
+    <link rel="stylesheet" href="assets/style.css?v=1.16.8" />
   </head>
   <body>
     <a class="skip-link" href="#download">跳到下载</a>
@@ -51,6 +86,7 @@
       <nav class="site-nav" aria-label="页面导航">
         <a href="#pain">为什么用它</a>
         <a href="#features">核心功能</a>
+        <a href="#glossary">指标词典</a>
         <a href="#shots">界面</a>
         <a href="#pricing">价格</a>
         <a href="#faq">常见问题</a>
@@ -63,9 +99,9 @@
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow"><span class="dot"></span>Windows 10 / 11 · 免费下载 · 绿色便携版</p>
-          <h1 id="hero-title">黄金短线，<br /><span class="gold">先看清谁在买、<br />谁在卖</span></h1>
+          <h1 id="hero-title">黄金短线交易软件<br /><span class="gold">订单流 + 成交量分布</span><br />看清谁在买、谁在卖</h1>
           <p class="lede">
-            成交量分布把筹码堆的位置摊开，订单流 CVD 看得出主动买卖谁在持续，四窗格同屏 + 短期走势卡把多周期合成一句话。免费数据源开箱可用，不用 API Key，也不用注册。
+            订单流（Order Flow）看清主动买、主动卖与大单方向；成交量分布（Volume Profile）把 POC/VAH/VAL 直接画在 K 线右侧；再加 CVD、VWAP、盘口十档和多周期同屏，一屏判断短线方向。免费数据源开箱可用，不用 API Key，也不用注册。
           </p>
           <div class="hero-actions" id="download">
             <a class="btn-download" id="download-btn" href="https://github.com/songxuanhao/GoldSight/releases/download/v1.15.27/GoldSight-1.15.27-win-x64.zip" rel="noopener" download data-state="idle">
@@ -88,9 +124,9 @@
             </p>
           </div>
           <ul class="hero-points">
-            <li>免费实时数据 · 无需付费行情 API</li>
-            <li>四周期同屏 · 一屏看全局</li>
-            <li>绿色便携 · 删掉文件夹即卸载</li>
+            <li>订单流 + 成交量分布 + CVD + VWAP</li>
+            <li>多周期同屏 · 1分/5分/15分/1小时</li>
+            <li>免费数据源 · 绿色便携 · 无需注册</li>
           </ul>
         </div>
 
@@ -106,7 +142,7 @@
               draggable="false"
             />
           </div>
-          <figcaption>四窗格同屏 · 成交量分布 · 订单流 · 短期走势，一屏全在</figcaption>
+          <figcaption>四窗格同屏 · 成交量分布 · 订单流 · 短期走势，一屏全在（点击图片放大）</figcaption>
         </figure>
       </section>
 
@@ -142,10 +178,10 @@
         <div class="feature-copy">
           <p class="eyebrow">成交量分布 · Volume Profile</p>
           <h2 id="f1-title">筹码堆在哪，<br />图上直接画出来</h2>
-          <p class="feature-lede">不用再猜支撑压力在哪。每个价格档的成交量直接画在 K 线右侧，量能越大越亮，POC 自动标在刻度上。</p>
+          <p class="feature-lede">不用再猜支撑压力在哪。成交量分布（Volume Profile）把每个价格档的成交量直接画在 K 线右侧，量能越大越亮，POC / VAH / VAL 自动标在右侧刻度上。</p>
           <ul class="feature-points">
-            <li><strong>POC / VAH / VAL</strong> 价格直接标在右侧刻度尺，一眼找到价值区间</li>
-            <li><strong>连续像素带</strong>渲染，没有锯齿和断层，放大看依然干净</li>
+            <li><strong>POC（控制点）/ VAH / VAL</strong> 直接标在右侧刻度尺，一眼找到价值区间</li>
+            <li>按成交量高低着色的 <strong>Volume Profile</strong>，筹码密集区比数字更直观</li>
             <li>交易日累加 / 可视范围 / 锚定区间三种模式，按你的交易节奏切换</li>
           </ul>
         </div>
@@ -161,11 +197,11 @@
         <div class="feature-copy">
           <p class="eyebrow">订单流 · CVD</p>
           <h2 id="f2-title">谁在主动买，<br />谁在主动卖</h2>
-          <p class="feature-lede">报价只能说明价格到了哪，订单流说明钱往哪走。CVD 曲线、60 秒滚动斜率、盘口买卖压、大单方向，全在一屏。</p>
+          <p class="feature-lede">报价只说明价格到了哪，订单流（Order Flow）说明钱往哪走：主动买卖差、CVD 累计曲线、60 秒滚动斜率、盘口买卖压、大单方向，全在一屏。</p>
           <ul class="feature-points">
-            <li><strong>主动买卖差 + CVD 累计曲线</strong>，累积还是一波流一眼可辨</li>
-            <li><strong>斜率用回归 + EMA 平滑</strong>，还给出强度 σ，单笔大单带不偏</li>
-            <li><strong>诚实提示</strong>：回测没有统计优势时会直说，不诱导你按方向下单</li>
+            <li><strong>主动买卖差 + CVD（累计成交量差）</strong>，持续累积还是一波流一眼可辨</li>
+            <li><strong>斜率用滚动回归 + EMA 平滑</strong>，还给出强度 σ，单笔大单带不偏</li>
+            <li><strong>盘口 DOM + 大单方向</strong>：买卖十档、大单主动买卖，判断谁在扫单</li>
           </ul>
         </div>
       </section>
@@ -180,7 +216,7 @@
         <div class="feature-copy">
           <p class="eyebrow">多周期 · 短期走势卡</p>
           <h2 id="f3-title">四个周期，<br />合成一句话</h2>
-          <p class="feature-lede">1 分钟到 1 小时同时摆在眼前，右侧把多周期涨跌、VWAP 偏离、CVD 变化、盘口和大单按权重合成当前状态。</p>
+          <p class="feature-lede">1 分钟到 1 小时同时摆在眼前：多周期涨跌、VWAP（成交量加权均价）偏离、CVD 变化、盘口和大单按权重合成一句话，短线方向不用来回切图。</p>
           <ul class="feature-points">
             <li><strong>1/5/15 分钟 + 1 小时</strong>同屏对比，不再来回切周期</li>
             <li>上涨趋势 / 偏多 / 震荡 / 偏空 / 下跌趋势，五档结论一眼看懂</li>
@@ -190,6 +226,100 @@
       </section>
 
       <!-- 交易者装备（原生推荐位，不标注“广告”） -->
+
+      <!-- 功能清单：关键词覆盖 + 让用户快速感知软件有什么 -->
+      <section class="section section-core" id="core" aria-labelledby="core-title">
+        <header class="section-head">
+          <p class="eyebrow">核心功能 · Features</p>
+          <h2 id="core-title">不只是 K 线：订单流与成交量分布的完整工具链</h2>
+          <p class="section-sub">下面每一项都是软件里真实存在的功能，不是概念。点开软件即可使用，无需插件、无需配置。</p>
+        </header>
+        <div class="core-grid">
+          <article class="core-card">
+            <span class="core-en">Volume Profile</span>
+            <h3>成交量分布</h3>
+            <p>按价格档统计成交量，POC / VAH / VAL 标在刻度上；支持交易日累加、可视范围、锚定区间三种模式。</p>
+          </article>
+          <article class="core-card">
+            <span class="core-en">Order Flow</span>
+            <h3>订单流</h3>
+            <p>主动买、主动卖、大单方向、盘口买卖压；用 XAUT / PAXG 真实逐笔成交计算，不靠报价推断。</p>
+          </article>
+          <article class="core-card">
+            <span class="core-en">CVD · Delta</span>
+            <h3>累计成交量差</h3>
+            <p>CVD 曲线 + 15 秒 / 1 分钟 / 3 分钟斜率表，带强度 σ，区分「持续累积」还是「一波流」。</p>
+          </article>
+          <article class="core-card">
+            <span class="core-en">VWAP</span>
+            <h3>成交量加权均价</h3>
+            <p>VWAP 与价格偏离，判断当前价格相对当日成交重心的位置，短线多空的分水岭。</p>
+          </article>
+          <article class="core-card">
+            <span class="core-en">DOM · Depth</span>
+            <h3>盘口与深度</h3>
+            <p>买卖十档（DOM）、净买卖压、60 秒买盘卖盘比，看清挂单与主动扫单的方向。</p>
+          </article>
+          <article class="core-card">
+            <span class="core-en">Multi-Timeframe</span>
+            <h3>多周期同屏</h3>
+            <p>1分 / 3分 / 5分 / 15分 / 30分 / 1小时 / 4小时 / 日线，1 / 2 / 3 / 4 窗格布局，一屏看全局。</p>
+          </article>
+          <article class="core-card">
+            <span class="core-en">Paper Trading</span>
+            <h3>模拟交易 + 回测</h3>
+            <p>实时练习与历史逐 K 回放，记录盈亏与胜率；不接实盘、不下真单、不碰资金。</p>
+          </article>
+          <article class="core-card">
+            <span class="core-en">Drawing · Alerts</span>
+            <h3>画线与预警</h3>
+            <p>水平线、趋势线、射线、矩形、斐波那契、文字备注与价格预警，全部本地保存。</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 说明：订单流 / 成交量分布怎么看（长尾 SEO） -->
+      <section class="section section-explain" id="guides" aria-labelledby="guides-title">
+        <header class="section-head">
+          <p class="eyebrow">新手也能看懂</p>
+          <h2 id="guides-title">订单流（Order Flow）和成交量分布，到底怎么看？</h2>
+        </header>
+        <div class="explain-grid">
+          <article class="explain-card">
+            <h3>成交量分布（Volume Profile）怎么看</h3>
+            <p>成交量和价格放在一张图上：把每个价格档的成交量横向画出来。成交量最大的那一档叫 <strong>POC（Point of Control，控制点）</strong>；从 POC 向上向下展开、包住约 70% 成交量的区间叫<strong>价值区</strong>，它的上沿是 <strong>VAH</strong>、下沿是 <strong>VAL</strong>。</p>
+            <p>价格在价值区上方运行，说明买方掌握主动；跌破 VAL 回到价值区，往往意味着回归；在 POC 附近反复震荡，说明多空都没走。用 GoldSight，不需要自己算，POC / VAH / VAL 会直接标在 K 线右侧的刻度上。</p>
+          </article>
+          <article class="explain-card">
+            <h3>订单流（Order Flow）怎么看</h3>
+            <p>K 线只告诉你价格到了哪，订单流告诉你<strong>钱往哪走</strong>。逐笔成交里，主动买（吃掉卖单）和主动卖（砸掉买单）的差，累计起来就是 <strong>CVD（Cumulative Volume Delta）</strong>。</p>
+            <p>CVD 持续走高、价格却横着走，说明有资金在买；CVD 与价格背离，往往是转折的前兆。再配合<strong>盘口十档（DOM）</strong>与<strong>大单方向</strong>，就能判断是持续累积还是一波流。GoldSight 把这些数字整理成一张图，不用自己写脚本统计逐笔。</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 指标词典：中英文关键词全覆盖（SEO + 用户认知） -->
+      <section class="section section-glossary" id="glossary" aria-labelledby="glossary-title">
+        <header class="section-head">
+          <p class="eyebrow">指标词典</p>
+          <h2 id="glossary-title">软件里的指标，中英文对照</h2>
+          <p class="section-sub">看到英文缩写不用猜：这些就是软件右侧面板与图表里出现的指标。</p>
+        </header>
+        <dl class="glossary-grid">
+          <div><dt>POC <span>Point of Control</span></dt><dd>成交量分布中成交量最大的价格档，即「控制点」。</dd></div>
+          <div><dt>VAH / VAL <span>Value Area High / Low</span></dt><dd>价值区（约 70% 成交量区间）的上沿与下沿。</dd></div>
+          <div><dt>CVD <span>Cumulative Volume Delta</span></dt><dd>主动买量减主动卖量的累计值，反映资金净流入/流出。</dd></div>
+          <div><dt>Delta <span>主动买卖差</span></dt><dd>某段时间内主动买与主动卖的成交量之差。</dd></div>
+          <div><dt>VWAP <span>Volume Weighted Average Price</span></dt><dd>按成交量加权的平均价，常被视为当日成交重心。</dd></div>
+          <div><dt>DOM <span>Depth of Market</span></dt><dd>盘口深度：买卖各十档挂单与买卖压力。</dd></div>
+          <div><dt>Volume Profile <span>成交量分布</span></dt><dd>按价格档统计成交量的分布图，也称筹码分布。</dd></div>
+          <div><dt>Order Flow <span>订单流</span></dt><dd>逐笔成交的方向、大小与主动方，用来判断谁在买卖。</dd></div>
+          <div><dt>Tick <span>逐笔成交</span></dt><dd>每一笔成交记录；逐笔数据比 K 线更接近真实交易。</dd></div>
+          <div><dt>OHLC <span>开高低收</span></dt><dd>Open / High / Low / Close，每根 K 线的四个价格。</dd></div>
+          <div><dt>σ <span>强度</span></dt><dd>CVD 斜率的标准化强度，|σ|≥2 视为趋势信号显著。</dd></div>
+          <div><dt>XAU/USD <span>伦敦金 / 现货黄金</span></dt><dd>黄金以美元计价的主流短线品种，软件默认行情标的。</dd></div>
+        </dl>
+      </section>
       <section class="section section-shop" aria-labelledby="shop-title">
         <header class="section-head">
           <p class="eyebrow">顺手推荐</p>
@@ -436,6 +566,9 @@
         </div>
         <div class="foot-meta">
           <a href="#download">下载</a>
+          <a href="#core">功能清单</a>
+          <a href="#guides">订单流与成交量分布</a>
+          <a href="#glossary">指标词典</a>
           <a href="#faq">常见问题</a>
           <a href="privacy.html">隐私政策</a>
           <a href="https://github.com/songxuanhao/GoldSight/issues/new" target="_blank" rel="noopener">合作联系</a>
@@ -472,5 +605,45 @@
     </div>
 
     <script src="assets/app.js?v=1.16.0" defer></script>
+
+    <!-- 界面大图查看器 -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="界面大图" hidden>
+      <button class="lightbox-close" id="lightbox-close" type="button" aria-label="关闭大图">×</button>
+      <img id="lightbox-img" alt="GoldSight 金瞳界面大图" />
+    </div>
+    <script>
+      (function () {
+        var lb = document.getElementById('lightbox');
+        var img = document.getElementById('lightbox-img');
+        var btn = document.getElementById('lightbox-close');
+        if (!lb || !img || !btn) return;
+        function open(src, alt) {
+          img.src = src;
+          img.alt = alt || 'GoldSight 金瞳界面大图';
+          lb.hidden = false;
+          lb.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          btn.focus();
+        }
+        function close() {
+          lb.classList.remove('open');
+          lb.hidden = true;
+          document.body.style.overflow = '';
+          img.removeAttribute('src');
+        }
+        document.addEventListener('click', function (e) {
+          var t = e.target;
+          if (t && t.tagName === 'IMG' && t.closest && t.closest('.shot-frame, .gallery figure')) {
+            e.preventDefault();
+            open(t.currentSrc || t.src, t.alt);
+          }
+        });
+        btn.addEventListener('click', close);
+        lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && lb.classList.contains('open')) close();
+        });
+      })();
+    </script>
   </body>
 </html>
