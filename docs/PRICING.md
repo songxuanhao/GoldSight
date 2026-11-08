@@ -70,3 +70,18 @@ gh release create v1.15.21 release\GoldSight-1.15.21-win-x64.zip --repo songxuan
 - 9.9 金额很低，建议「激活失败/机器码变更」免费重发；不设退款流程，页面写明「虚拟商品，激活后不支持退款」。
 - 支持渠道：站点 FAQ + GitHub Issues + 微信/QQ（人工）。
 - 备案/合规：个人收款码小额经营可以，但长期建议办个体工商户；软件内与落地页都需保留「模拟交易、不构成投资建议」的风险提示。
+
+## 自动解锁（v1.15.22，2026-11-08）
+
+软件内已内置「扫码付款 → 自动解锁」，买家不需要再联系作者发码。
+
+- 架构：落地页同域 Cloudflare Pages Functions（`GoldSight-web/functions/`）+ KV 存订单；价格与支付渠道由后端 `/api/config` 决定。
+- 软件侧：`src/license/purchase-info.ts` 的 `autoUnlockBaseUrl` 指向 `https://goldsight.pages.dev`；`src/components/LicenseDialog.tsx` 负责下单、展示二维码、每 3 秒轮询，拿到授权码后调用 `gs.license.activate()` 自动激活；`src/App.tsx` 启动时还会查一次本机是否已付款（重装自动恢复授权）。
+- 后端接口：`POST /api/orders`（机器码下单 → 虎皮椒返回二维码/支付链接）、`POST /api/xunhu/notify`（支付回调，验签 + 校验金额 + 幂等 → 用私钥签发授权码）、`GET /api/order?id=|machine=`（轮询）、`POST /admin/paid`（ADMIN_TOKEN 兜底/测试）。
+- 当前状态：支付渠道为 **mock**（`MOCK_PAY=1`），软件不会显示自动付款按钮、自动回退人工发码；等配置虎皮椒后改为真实渠道即可自动上线。
+- 开通真实支付：
+  1. 注册虎皮椒（或同类支持异步回调的聚合支付），拿到 APPID、SECRET、网关地址；
+  2. 在 `F:\deepseek\work\worker-license` 执行 `node <wrangler> secret put XUNHU_APPID` / `XUNHU_SECRET`（或通过 Cloudflare 控制台环境变量），把 `MOCK_PAY` 改为 `0`；
+  3. 重新 `wrangler pages deploy`（functions 与绑定已配好），`GET /api/config` 返回 `configured:true, mock:false` 后，软件会自动出现「扫码付款 · 自动解锁」按钮。
+- 运维兜底：`POST /admin/paid`（Header `X-Admin-Token`）可手动标记已付并发码；KV 键：`order:<id>`、`machine:<code>`、`paid:<machine>`。
+- 安全：授权码仍是 Ed25519 离线签名（客户端只校验公钥），服务器只存「已付款」事实；同一机器重复下单直接返回已发授权码。

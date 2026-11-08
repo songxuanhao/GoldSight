@@ -124,3 +124,11 @@ window.__goldSightAds                  // { mode, slots }
 ```
 
 日常更新流程不变：改 `assets/site.json` → `prepare-dist.ps1` → `deploy-pages.ps1`。
+
+## 自动解锁后端（v1.15.22）
+
+- 后端代码随站点一起部署：`GoldSight-web/functions/api/[[path]].js`、`functions/admin/[[path]].js`、`functions/_lib/app.js`；依赖 `js-md5`、`tweetnacl`（站点根 `package.json`，部署前 `npm install`）。
+- Pages 项目 `goldsight` 已绑定：KV 命名空间 `ORDERS`（id `6fb878cb35a24d5e9618511f95e890c9`）、环境变量 `PRICE_CNY=9.90`、`XUNHU_GATEWAY`、`MOCK_PAY`，加密变量 `LICENSE_SEED_B64`、`ADMIN_TOKEN`。
+- 部署命令（在 `GoldSight-web` 目录）：`node <wrangler路径> pages deploy dist --project-name goldsight --branch main`（wrangler 位于 `F:\deepseek\work\cf-deploy\node_modules\wrangler\bin\wrangler.js`）。
+- 已废弃的独立 Worker `goldsight-license.goldsight.workers.dev`：workers.dev 域名在国内被 DNS 污染无法访问，改用 pages.dev 同域 Functions，用户无需额外域名。
+- 自测：`node F:\deepseek\work\worker-license\test-e2e.cjs`（mock 下单 → 管理员标记已付 → 轮询拿码 → 校验签名）。
